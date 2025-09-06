@@ -3,11 +3,345 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>AI Scientist Equivalent Forecaster</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral Tech -->
+    <!-- Application Structure Plan: A single-page, scrolling narrative design that guides the user from the high-level conclusion to the underlying mechanics. The core of the app is an interactive calculator where users can adjust the key assumptions of the analogy (total exaFLOPs, scientists/exaFLOP, 24/7 multiplier). This interactive core dynamically updates all subsequent charts and text outputs. This structure was chosen to transform a static text-based analogy into an exploratory tool. It allows users to test the model's sensitivity, understand the drivers of the forecast, and see the impact of their changes in real-time, which is far more engaging and informative than a linear report. -->
+    <!-- Visualization & Content Choices:
+        1. Key Metrics (2025 vs 2026): Goal: Inform. Method: Dynamic stat cards. Interaction: Values for 2026 update from the calculator. Justification: Provides a quick, high-level summary.
+        2. Interactive Calculator: Goal: Explore assumptions. Method: HTML sliders. Interaction: User drags sliders to change inputs. Justification: The most effective way to engage with the model's core variables.
+        3. ExaFLOP Growth Chart: Goal: Compare change over time. Method: Bar chart (Chart.js). Interaction: The 2026 bar updates from the calculator. Justification: Clearly visualizes the scale of infrastructure growth.
+        4. AI vs. Human Scientists Chart: Goal: Compare AI capacity to a known human scale. Method: Bar chart (Chart.js). Interaction: AI bar updates from the calculator. Justification: Grounds the abstract forecast in a relatable comparison.
+        5. Future Infrastructure Breakdown: Goal: Organize composition. Method: Donut chart (Chart.js). Interaction: Hover tooltips. Justification: Shows the relative contribution of different projects to the total future compute.
+        All visualizations are rendered on Canvas via Chart.js. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #2c3e50;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #3498db;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #3498db;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
 </head>
-<body>
-    <h1>Welcome to the Home Page</h1>
-    <p>Click the link below to go to the 'in' page.</p>
-    <a href="in.html">Go to in.html</a>
+<body class="antialiased">
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">The Rise of AI Scientists</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">An interactive dashboard exploring the projected growth of AI research capacity, translated into human scientist-equivalents.</p>
+        </header>
+
+        <section id="summary" class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">At a Glance: Today vs. Tomorrow</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">2025 Global Compute</h3>
+                    <p class="text-4xl font-bold text-blue-600">5-10</p>
+                    <span class="text-sm text-gray-500">ExaFLOPs</span>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">2025 AI Scientist-Years</h3>
+                    <p class="text-4xl font-bold text-blue-600">0.5-1 <span class="text-2xl">Million</span></p>
+                    <span class="text-sm text-gray-500">Effective output per year</span>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">2026 Projected Compute</h3>
+                    <p class="text-4xl font-bold text-green-600" id="summary-exaflops">250</p>
+                    <span class="text-sm text-gray-500">ExaFLOPs</span>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">2026 Projected AI Scientist-Years</h3>
+                    <p class="text-4xl font-bold text-green-600" id="summary-scientists">21.9 <span class="text-2xl">Million</span></p>
+                    <span class="text-sm text-gray-500">Effective output per year</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculator" class="card p-8 mb-12">
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">Interactive Forecast Model</h2>
+            <p class="text-center text-gray-600 mb-8">Adjust the sliders to explore how different assumptions impact the final forecast. See how the charts and numbers below update in real-time.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <label for="exaflops-slider" class="font-semibold text-gray-700">Total Worldwide exaFLOPs (~2026)</label>
+                    <div class="flex items-center space-x-4 mt-2">
+                        <input id="exaflops-slider" type="range" min="200" max="300" value="250" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
+                        <span id="exaflops-value" class="font-bold text-blue-600 w-16 text-right">250</span>
+                    </div>
+                </div>
+                <div>
+                    <label for="scientists-per-ef-slider" class="font-semibold text-gray-700">Scientist Equivalents per exaFLOP</label>
+                    <div class="flex items-center space-x-4 mt-2">
+                        <input id="scientists-per-ef-slider" type="range" min="10000" max="30000" value="20000" step="1000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
+                        <span id="scientists-per-ef-value" class="font-bold text-blue-600 w-16 text-right">20k</span>
+                    </div>
+                </div>
+                <div>
+                    <label for="multiplier-slider" class="font-semibold text-gray-700">24/7 Output Multiplier (vs Human)</label>
+                    <div class="flex items-center space-x-4 mt-2">
+                        <input id="multiplier-slider" type="range" min="3" max="5" value="4" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
+                        <span id="multiplier-value" class="font-bold text-blue-600 w-16 text-right">4.0x</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+            <div class="card p-6">
+                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">Compute Growth: 2025 vs. 2026</h3>
+                 <p class="text-center text-sm text-gray-600 mb-4">This chart shows the massive leap in planned global AI computing power. The 2025 range is based on current estimates, while the 2026 bar reflects your selection in the interactive model above.</p>
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+            <div class="card p-6">
+                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">AI vs. Human Scientific Capacity (~2026)</h3>
+                 <p class="text-center text-sm text-gray-600 mb-4">This compares the projected effective output of AI scientists to the estimated 10 million human scientists worldwide. See how AI capacity changes based on your assumptions.</p>
+                <div class="chart-container">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="breakdown" class="card p-8">
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">Breakdown of Near-Term Infrastructure</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">The projected leap in compute power is driven by several massive projects. This chart visualizes the conservative estimates for their combined contribution by ~2026.</p>
+            <div class="chart-container" style="max-width: 450px;">
+                <canvas id="breakdownChart"></canvas>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-6 mt-8 text-gray-500 text-sm">
+        <p>Interactive visualization based on the AI scientist-equivalent analogy. All data is derived from the provided report text.</p>
+        <p class="mt-2"><a href="in.html" class="text-blue-600 hover:underline">Go to the 'Race' Page</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const exaflopsSlider = document.getElementById('exaflops-slider');
+            const scientistsPerEfSlider = document.getElementById('scientists-per-ef-slider');
+            const multiplierSlider = document.getElementById('multiplier-slider');
+
+            const exaflopsValue = document.getElementById('exaflops-value');
+            const scientistsPerEfValue = document.getElementById('scientists-per-ef-value');
+            const multiplierValue = document.getElementById('multiplier-value');
+
+            const summaryExaflops = document.getElementById('summary-exaflops');
+            const summaryScientists = document.getElementById('summary-scientists');
+
+            const humanScientists = 10;
+
+            let growthChart, comparisonChart, breakdownChart;
+
+            function formatNumber(num) {
+                if (num >= 1000000) {
+                    return (num / 1000000).toFixed(1) + 'M';
+                }
+                if (num >= 1000) {
+                    return (num / 1000).toFixed(0) + 'k';
+                }
+                return num.toString();
+            }
+
+            const chartTooltip = {
+                callbacks: {
+                    label: function(context) {
+                        let label = context.dataset.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        if (context.parsed.y !== null) {
+                            label += context.parsed.y.toLocaleString();
+                        }
+                        return label;
+                    }
+                }
+            };
+
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: chartTooltip
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return formatNumber(value);
+                            }
+                        }
+                    }
+                }
+            };
+
+            function createGrowthChart() {
+                const ctx = document.getElementById('growthChart').getContext('2d');
+                growthChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['2025 (Low)', '2025 (High)', '2026 Projection'],
+                        datasets: [{
+                            label: 'ExaFLOPs',
+                            data: [5, 10, 250],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.6)',
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(75, 192, 192, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(75, 192, 192, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: { ...chartOptions, plugins: { legend: { display: false } } }
+                });
+            }
+
+            function createComparisonChart() {
+                const ctx = document.getElementById('comparisonChart').getContext('2d');
+                comparisonChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Human Scientists', 'AI Scientist Equivalents'],
+                        datasets: [{
+                            label: 'Effective Scientist-Years (Millions)',
+                            data: [humanScientists, 20],
+                            backgroundColor: [
+                                'rgba(255, 159, 64, 0.8)',
+                                'rgba(153, 102, 255, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(153, 102, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: { ...chartOptions, plugins: { legend: { display: false } } }
+                });
+            }
+
+            function createBreakdownChart() {
+                const ctx = document.getElementById('breakdownChart').getContext('2d');
+                breakdownChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['NVIDIA Stargate', 'Hyperscalers', 'China Clusters'],
+                        datasets: [{
+                            label: 'ExaFLOPs Contribution',
+                            data: [100, 70, 45],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.8)',
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(255, 99, 132, 0.8)'
+                            ],
+                            hoverOffset: 4
+                        }]
+                    },
+                     options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            tooltip: chartTooltip
+                        }
+                    }
+                });
+            }
+
+            function updateCalculations() {
+                const exaflops = parseInt(exaflopsSlider.value);
+                const scientistsPerEf = parseInt(scientistsPerEfSlider.value);
+                const multiplier = parseFloat(multiplierSlider.value);
+
+                exaflopsValue.textContent = exaflops;
+                scientistsPerEfValue.textContent = `${scientistsPerEf / 1000}k`;
+                multiplierValue.textContent = `${multiplier.toFixed(1)}x`;
+
+                const liveScientists = exaflops * scientistsPerEf;
+                const effectiveScientists = liveScientists * multiplier;
+
+                summaryExaflops.textContent = exaflops;
+                summaryScientists.innerHTML = `${(effectiveScientists / 1000000).toFixed(1)} <span class="text-2xl">Million</span>`;
+
+                if (growthChart) {
+                    growthChart.data.datasets[0].data[2] = exaflops;
+                    growthChart.update();
+                }
+
+                if (comparisonChart) {
+                    comparisonChart.data.datasets[0].data[1] = effectiveScientists / 1000000;
+                    comparisonChart.update();
+                }
+            }
+
+            createGrowthChart();
+            createComparisonChart();
+            createBreakdownChart();
+
+            [exaflopsSlider, scientistsPerEfSlider, multiplierSlider].forEach(slider => {
+                slider.addEventListener('input', updateCalculations);
+            });
+
+            updateCalculations();
+        });
+    </script>
 </body>
 </html>
