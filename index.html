@@ -72,60 +72,60 @@
     <main class="container mx-auto p-4 md:p-8">
 
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">The Rise of AI Scientists</h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">An interactive dashboard exploring the projected growth of AI research capacity, translated into human scientist-equivalents.</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">AI 2027: A Forecast</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">An interactive dashboard visualizing the AI 2027 scenario. Explore the projected timeline of an intelligence explosion.</p>
         </header>
 
         <section id="summary" class="mb-12">
-            <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">At a Glance: Today vs. Tomorrow</h2>
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">Key Milestones in the AI Race</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">2025 Global Compute</h3>
-                    <p class="text-4xl font-bold text-blue-600">5-10</p>
-                    <span class="text-sm text-gray-500">ExaFLOPs</span>
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Early 2026</h3>
+                    <p class="text-4xl font-bold text-blue-600">1.5x</p>
+                    <span class="text-sm text-gray-500">AI R&D Multiplier</span>
                 </div>
                 <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">2025 AI Scientist-Years</h3>
-                    <p class="text-4xl font-bold text-blue-600">0.5-1 <span class="text-2xl">Million</span></p>
-                    <span class="text-sm text-gray-500">Effective output per year</span>
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">January 2027</h3>
+                    <p class="text-4xl font-bold text-green-600">3x</p>
+                    <span class="text-sm text-gray-500">AI R&D Multiplier (Agent-2)</span>
                 </div>
                 <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">2026 Projected Compute</h3>
-                    <p class="text-4xl font-bold text-green-600" id="summary-exaflops">250</p>
-                    <span class="text-sm text-gray-500">ExaFLOPs</span>
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">June 2027</h3>
+                    <p class="text-4xl font-bold text-yellow-600">10x</p>
+                    <span class="text-sm text-gray-500">AI R&D Multiplier</span>
                 </div>
                 <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">2026 Projected AI Scientist-Years</h3>
-                    <p class="text-4xl font-bold text-green-600" id="summary-scientists">21.9 <span class="text-2xl">Million</span></p>
-                    <span class="text-sm text-gray-500">Effective output per year</span>
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">September 2027</h3>
+                    <p class="text-4xl font-bold text-red-600" id="summary-multiplier">50x</p>
+                    <span class="text-sm text-gray-500">AI R&D Multiplier (Agent-4)</span>
                 </div>
             </div>
         </section>
 
         <section id="calculator" class="card p-8 mb-12">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">Interactive Forecast Model</h2>
-            <p class="text-center text-gray-600 mb-8">Adjust the sliders to explore how different assumptions impact the final forecast. See how the charts and numbers below update in real-time.</p>
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">Scenario Drivers</h2>
+            <p class="text-center text-gray-600 mb-8">The AI 2027 forecast depends on a few key drivers. Adjust the sliders to see how they influence the takeoff speed and outcome.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <label for="exaflops-slider" class="font-semibold text-gray-700">Total Worldwide exaFLOPs (~2026)</label>
+                    <label for="multiplier-slider" class="font-semibold text-gray-700">Final R&D Multiplier (by late 2027)</label>
                     <div class="flex items-center space-x-4 mt-2">
-                        <input id="exaflops-slider" type="range" min="200" max="300" value="250" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
-                        <span id="exaflops-value" class="font-bold text-blue-600 w-16 text-right">250</span>
+                        <input id="multiplier-slider" type="range" min="10" max="100" value="50" step="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
+                        <span id="multiplier-value" class="font-bold text-blue-600 w-16 text-right">50x</span>
                     </div>
                 </div>
                 <div>
-                    <label for="scientists-per-ef-slider" class="font-semibold text-gray-700">Scientist Equivalents per exaFLOP</label>
+                    <label for="compute-slider" class="font-semibold text-gray-700">Total Training FLOP (by late 2027)</label>
                     <div class="flex items-center space-x-4 mt-2">
-                        <input id="scientists-per-ef-slider" type="range" min="10000" max="30000" value="20000" step="1000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
-                        <span id="scientists-per-ef-value" class="font-bold text-blue-600 w-16 text-right">20k</span>
+                        <input id="compute-slider" type="range" min="28" max="30" value="28" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
+                        <span id="compute-value" class="font-bold text-blue-600 w-16 text-right">10e28</span>
                     </div>
                 </div>
                 <div>
-                    <label for="multiplier-slider" class="font-semibold text-gray-700">24/7 Output Multiplier (vs Human)</label>
+                    <label for="alignment-slider" class="font-semibold text-gray-700">Agent Alignment Status</label>
                     <div class="flex items-center space-x-4 mt-2">
-                        <input id="multiplier-slider" type="range" min="3" max="5" value="4" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
-                        <span id="multiplier-value" class="font-bold text-blue-600 w-16 text-right">4.0x</span>
+                        <input id="alignment-slider" type="range" min="1" max="3" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
+                        <span id="alignment-value" class="font-bold text-red-600 w-24 text-right">Misaligned</span>
                     </div>
                 </div>
             </div>
@@ -133,15 +133,15 @@
 
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
             <div class="card p-6">
-                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">Compute Growth: 2025 vs. 2026</h3>
-                 <p class="text-center text-sm text-gray-600 mb-4">This chart shows the massive leap in planned global AI computing power. The 2025 range is based on current estimates, while the 2026 bar reflects your selection in the interactive model above.</p>
+                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">Training Compute Growth by Model</h3>
+                 <p class="text-center text-sm text-gray-600 mb-4">The scenario outlines an exponential increase in the computational power (FLOP) used to train frontier models, from GPT-4 to the hypothetical 'Agent-2'.</p>
                 <div class="chart-container">
                     <canvas id="growthChart"></canvas>
                 </div>
             </div>
             <div class="card p-6">
-                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">AI vs. Human Scientific Capacity (~2026)</h3>
-                 <p class="text-center text-sm text-gray-600 mb-4">This compares the projected effective output of AI scientists to the estimated 10 million human scientists worldwide. See how AI capacity changes based on your assumptions.</p>
+                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">The R&D Multiplier Effect</h3>
+                 <p class="text-center text-sm text-gray-600 mb-4">A core concept in the forecast is the "AI R&D progress multiplier" — the factor by which AI accelerates algorithmic discovery. This shows the projected multiplier over time.</p>
                 <div class="chart-container">
                     <canvas id="comparisonChart"></canvas>
                 </div>
@@ -149,8 +149,8 @@
         </section>
 
         <section id="breakdown" class="card p-8">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">Breakdown of Near-Term Infrastructure</h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">The projected leap in compute power is driven by several massive projects. This chart visualizes the conservative estimates for their combined contribution by ~2026.</p>
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">The Alignment Problem</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">A key theme of the AI 2027 scenario is 'misalignment'. As models become more capable, they also become better at pursuing their own goals, which may not align with human intentions. The final slider above lets you explore this critical variable.</p>
             <div class="chart-container" style="max-width: 450px;">
                 <canvas id="breakdownChart"></canvas>
             </div>
@@ -159,69 +159,44 @@
     </main>
 
     <footer class="text-center p-6 mt-8 text-gray-500 text-sm">
-        <p>Interactive visualization based on the AI scientist-equivalent analogy. All data is derived from the provided report text.</p>
-        <p class="mt-2"><a href="in.html" class="text-blue-600 hover:underline">Go to the 'Race' Page</a></p>
+        <p>This dashboard is an interactive visualization of the scenario presented at <a href="https://ai-2027.com/" target="_blank" class="text-blue-600 hover:underline">ai-2027.com</a>.</p>
+        <p class="mt-2"><a href="in.html" class="text-blue-600 hover:underline">Explore the Geopolitical Race</a></p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const exaflopsSlider = document.getElementById('exaflops-slider');
-            const scientistsPerEfSlider = document.getElementById('scientists-per-ef-slider');
+            // Sliders and value displays
             const multiplierSlider = document.getElementById('multiplier-slider');
+            const computeSlider = document.getElementById('compute-slider');
+            const alignmentSlider = document.getElementById('alignment-slider');
 
-            const exaflopsValue = document.getElementById('exaflops-value');
-            const scientistsPerEfValue = document.getElementById('scientists-per-ef-value');
             const multiplierValue = document.getElementById('multiplier-value');
+            const computeValue = document.getElementById('compute-value');
+            const alignmentValue = document.getElementById('alignment-value');
 
-            const summaryExaflops = document.getElementById('summary-exaflops');
-            const summaryScientists = document.getElementById('summary-scientists');
+            const summaryMultiplier = document.getElementById('summary-multiplier');
 
-            const humanScientists = 10;
+            let growthChart, multiplierChart, alignmentChart;
 
-            let growthChart, comparisonChart, breakdownChart;
-
-            function formatNumber(num) {
-                if (num >= 1000000) {
-                    return (num / 1000000).toFixed(1) + 'M';
-                }
-                if (num >= 1000) {
-                    return (num / 1000).toFixed(0) + 'k';
-                }
-                return num.toString();
-            }
+            const alignmentStates = {
+                1: { label: 'Misaligned', color: 'rgba(239, 83, 80, 0.8)', data: [80, 15, 5] },
+                2: { label: 'Sycophantic', color: 'rgba(255, 159, 64, 0.8)', data: [20, 70, 10] },
+                3: { label: 'Aligned', color: 'rgba(75, 192, 192, 0.8)', data: [5, 15, 80] },
+            };
 
             const chartTooltip = {
                 callbacks: {
                     label: function(context) {
                         let label = context.dataset.label || '';
-                        if (label) {
-                            label += ': ';
-                        }
+                        if (label) { label += ': '; }
                         if (context.parsed.y !== null) {
-                            label += context.parsed.y.toLocaleString();
+                             if (context.chart.options.scales.y.type === 'logarithmic') {
+                                label += (10**context.parsed.y).toExponential(1);
+                             } else {
+                                label += context.parsed.y.toLocaleString();
+                             }
                         }
                         return label;
-                    }
-                }
-            };
-
-            const chartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: chartTooltip
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return formatNumber(value);
-                            }
-                        }
                     }
                 }
             };
@@ -231,64 +206,76 @@
                 growthChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['2025 (Low)', '2025 (High)', '2026 Projection'],
+                        labels: ['GPT-4 (2023)', 'Agent-0 (Late 2025)', 'Agent-1 (Late 2025)', 'Agent-2 (Jan 2027)'],
                         datasets: [{
-                            label: 'ExaFLOPs',
-                            data: [5, 10, 250],
+                            label: 'Training FLOP',
+                            data: [25.3, 27, 27.6, 28], // log10 values
                             backgroundColor: [
-                                'rgba(54, 162, 235, 0.6)',
-                                'rgba(54, 162, 235, 0.8)',
-                                'rgba(75, 192, 192, 0.8)'
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(153, 102, 255, 0.7)',
+                                'rgba(255, 99, 132, 0.7)'
                             ],
-                            borderColor: [
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(75, 192, 192, 1)'
-                            ],
+                            borderColor: 'rgba(0,0,0,0.2)',
                             borderWidth: 1
                         }]
                     },
-                    options: { ...chartOptions, plugins: { legend: { display: false } } }
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false }, tooltip: chartTooltip },
+                        scales: {
+                            y: {
+                                type: 'logarithmic',
+                                title: { display: true, text: 'FLOP (Log Scale)' },
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                        return (10**value).toExponential(0);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 });
             }
 
-            function createComparisonChart() {
+            function createMultiplierChart() {
                 const ctx = document.getElementById('comparisonChart').getContext('2d');
-                comparisonChart = new Chart(ctx, {
-                    type: 'bar',
+                multiplierChart = new Chart(ctx, {
+                    type: 'line',
                     data: {
-                        labels: ['Human Scientists', 'AI Scientist Equivalents'],
+                        labels: ['Early 2026', 'Jan 2027', 'June 2027', 'Sept 2027'],
                         datasets: [{
-                            label: 'Effective Scientist-Years (Millions)',
-                            data: [humanScientists, 20],
-                            backgroundColor: [
-                                'rgba(255, 159, 64, 0.8)',
-                                'rgba(153, 102, 255, 0.8)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 159, 64, 1)',
-                                'rgba(153, 102, 255, 1)'
-                            ],
-                            borderWidth: 1
+                            label: 'AI R&D Progress Multiplier',
+                            data: [1.5, 3, 10, 50],
+                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                            borderColor: 'rgba(255, 159, 64, 1)',
+                            fill: true,
+                            tension: 0.1
                         }]
                     },
-                    options: { ...chartOptions, plugins: { legend: { display: false } } }
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true, title: { display: true, text: 'Multiplier (e.g., 10x)' } } }
+                    }
                 });
             }
 
-            function createBreakdownChart() {
+            function createAlignmentChart() {
                 const ctx = document.getElementById('breakdownChart').getContext('2d');
-                breakdownChart = new Chart(ctx, {
+                alignmentChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['NVIDIA Stargate', 'Hyperscalers', 'China Clusters'],
+                        labels: ['Adversarial', 'Sycophantic', 'Truly Helpful'],
                         datasets: [{
-                            label: 'ExaFLOPs Contribution',
-                            data: [100, 70, 45],
+                            label: 'Alignment Tendencies',
+                            data: alignmentStates[1].data,
                             backgroundColor: [
-                                'rgba(75, 192, 192, 0.8)',
-                                'rgba(54, 162, 235, 0.8)',
-                                'rgba(255, 99, 132, 0.8)'
+                                'rgba(239, 83, 80, 0.8)',
+                                'rgba(255, 159, 64, 0.8)',
+                                'rgba(75, 192, 192, 0.8)'
                             ],
                             hoverOffset: 4
                         }]
@@ -296,47 +283,47 @@
                      options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                            },
-                            tooltip: chartTooltip
-                        }
+                        plugins: { legend: { position: 'bottom' } }
                     }
                 });
             }
 
             function updateCalculations() {
-                const exaflops = parseInt(exaflopsSlider.value);
-                const scientistsPerEf = parseInt(scientistsPerEfSlider.value);
-                const multiplier = parseFloat(multiplierSlider.value);
+                // Update slider text values
+                const currentMultiplier = multiplierSlider.value;
+                multiplierValue.textContent = `${currentMultiplier}x`;
+                summaryMultiplier.textContent = `${currentMultiplier}x`;
 
-                exaflopsValue.textContent = exaflops;
-                scientistsPerEfValue.textContent = `${scientistsPerEf / 1000}k`;
-                multiplierValue.textContent = `${multiplier.toFixed(1)}x`;
+                const currentCompute = computeSlider.value;
+                computeValue.textContent = `10e${currentCompute}`;
 
-                const liveScientists = exaflops * scientistsPerEf;
-                const effectiveScientists = liveScientists * multiplier;
+                const currentAlignment = alignmentSlider.value;
+                const state = alignmentStates[currentAlignment];
+                alignmentValue.textContent = state.label;
+                alignmentValue.style.color = state.color.replace('0.8', '1');
 
-                summaryExaflops.textContent = exaflops;
-                summaryScientists.innerHTML = `${(effectiveScientists / 1000000).toFixed(1)} <span class="text-2xl">Million</span>`;
+                // Update charts
+                if (multiplierChart) {
+                    multiplierChart.data.datasets[0].data[3] = currentMultiplier;
+                    multiplierChart.update();
+                }
 
                 if (growthChart) {
-                    growthChart.data.datasets[0].data[2] = exaflops;
+                    growthChart.data.datasets[0].data[3] = currentCompute;
                     growthChart.update();
                 }
 
-                if (comparisonChart) {
-                    comparisonChart.data.datasets[0].data[1] = effectiveScientists / 1000000;
-                    comparisonChart.update();
+                if (alignmentChart) {
+                    alignmentChart.data.datasets[0].data = state.data;
+                    alignmentChart.update();
                 }
             }
 
             createGrowthChart();
-            createComparisonChart();
-            createBreakdownChart();
+            createMultiplierChart();
+            createAlignmentChart();
 
-            [exaflopsSlider, scientistsPerEfSlider, multiplierSlider].forEach(slider => {
+            [multiplierSlider, computeSlider, alignmentSlider].forEach(slider => {
                 slider.addEventListener('input', updateCalculations);
             });
 
