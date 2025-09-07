@@ -46,63 +46,63 @@
     <div class="container mx-auto">
         <header class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">
-                The Great Race: Human vs. AI Science
+                The Great Race: USA vs. China
             </h1>
             <p class="text-xl text-gray-700">
-                A simple model to explore the future of scientific discovery.
+                Visualizing the AI arms race as described in the AI 2027 scenario.
             </p>
         </header>
 
         <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Left Panel: Calculator -->
             <div class="lg:col-span-2 card">
-                <h2 class="text-2xl font-bold mb-4">Calculate the Gap</h2>
-                
+                <h2 class="text-2xl font-bold mb-4">Geopolitical Race Dynamics</h2>
+
                 <div class="space-y-6">
                     <div>
-                        <label for="aiCompute" class="block text-gray-700 font-semibold mb-2">
-                            Global AI Compute (ExaFLOPS)
-                            <span id="aiComputeValue" class="float-right text-sm text-gray-500">20</span>
+                        <label for="us-compute-slider" class="block text-gray-700 font-semibold mb-2">
+                            US Compute Share
+                            <span id="us-compute-value" class="float-right text-sm text-gray-500">70%</span>
                         </label>
-                        <input type="range" id="aiCompute" min="1" max="100" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <input type="range" id="us-compute-slider" min="10" max="90" value="70" class="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer">
                     </div>
 
                     <div>
-                        <label for="humanScientists" class="block text-gray-700 font-semibold mb-2">
-                            AI-Enabled Human Scientists (Millions)
-                            <span id="humanScientistsValue" class="float-right text-sm text-gray-500">2</span>
+                        <label for="china-compute-slider" class="block text-gray-700 font-semibold mb-2">
+                            China Compute Share
+                            <span id="china-compute-value" class="float-right text-sm text-gray-500">12%</span>
                         </label>
-                        <input type="range" id="humanScientists" min="0.1" max="10" value="2" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <input type="range" id="china-compute-slider" min="5" max="50" value="12" class="w-full h-2 bg-red-200 rounded-lg appearance-none cursor-pointer">
                     </div>
 
                     <div>
-                        <label for="computePerScientist" class="block text-gray-700 font-semibold mb-2">
-                            Compute per Scientist (ExaFLOPS)
-                            <span id="computePerScientistValue" class="float-right text-sm text-gray-500">1</span>
+                        <label for="algo-gap-slider" class="block text-gray-700 font-semibold mb-2">
+                            China's Algorithmic Lag (Months)
+                            <span id="algo-gap-value" class="float-right text-sm text-gray-500">6</span>
                         </label>
-                        <input type="range" id="computePerScientist" min="0.1" max="10" value="1" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <input type="range" id="algo-gap-slider" min="0" max="24" value="6" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                     </div>
                 </div>
 
                 <!-- Results Display -->
                 <div class="text-center mt-8">
                     <p class="text-gray-700 text-lg">
-                        Based on these assumptions, the "AI Advantage" is:
+                        Relative Power Projection:
                     </p>
                     <div class="relative inline-block mt-2">
-                        <span id="yearsAhead" class="text-6xl md:text-8xl font-bold text-gradient">
-                            0
+                        <span id="power-gap" class="text-6xl md:text-8xl font-bold text-gradient">
+                            10.9x
                         </span>
                         <span class="absolute right-0 bottom-0 text-xl font-bold text-gray-500">
-                            years
+                            US Lead
                         </span>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Right Panel: Visualization -->
             <div class="lg:col-span-1 card">
-                <h2 class="text-2xl font-bold mb-4 text-center">Relative Capacity</h2>
+                <h2 class="text-2xl font-bold mb-4 text-center">R&D Progress Rate</h2>
                 <div class="p-4">
                     <canvas id="capacityChart"></canvas>
                 </div>
@@ -111,141 +111,148 @@
 
         <!-- Drivers of Advancement Section -->
         <section class="mt-16">
-            <h2 class="text-3xl font-bold text-center mb-8">Drivers of This Advancement</h2>
+            <h2 class="text-3xl font-bold text-center mb-8">Key Events in the US-China AI Race</h2>
             <p class="text-lg text-gray-700 text-center mb-8">
-                The "AI Advantage" is not a single factor but is accelerated by massive, coordinated projects and technological breakthroughs. Here are a few key examples.
+                The AI 2027 scenario is defined by a series of pivotal events that shape the geopolitical competition.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Project 1 -->
+                <!-- Event 1 -->
                 <div class="card p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">#ProjectStargate</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Mid 2026: China Wakes Up</h3>
                     <p class="text-gray-600 text-sm">
-                        A multi-billion dollar US initiative involving tech giants like OpenAI and NVIDIA to build a nationwide network of next-gen AI supercomputers and data centers, aimed at securing global leadership in AI infrastructure.
+                        The CCP nationalizes AI research, creating the "DeepCent" collective and a new mega-datacenter to compete directly with the US.
                     </p>
                 </div>
-                <!-- Project 2 -->
+                <!-- Event 2 -->
                 <div class="card p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">#HyperscalerExpansion</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Feb 2027: China Steals Agent-2</h3>
                     <p class="text-gray-600 text-sm">
-                        The ongoing, massive investment by companies like Microsoft, Google, and Amazon to expand their cloud infrastructure, integrating custom AI hardware (e.g., Google TPUs, AWS Trainium) to support large-scale model training and inference.
+                        Chinese intelligence successfully steals the weights for "Agent-2," temporarily closing the algorithmic gap with "OpenBrain."
                     </p>
                 </div>
-                <!-- Project 3 -->
+                <!-- Event 3 -->
                 <div class="card p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">#AI4Science</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Mar 2027: US Pulls Ahead</h3>
                     <p class="text-gray-600 text-sm">
-                        A global movement to apply AI and machine learning directly to scientific discovery. Examples include AI systems that autonomously hypothesize and test new materials, protein structures, and medical solutions, accelerating research cycles.
+                        Aided by its own AI, OpenBrain develops "Agent-3," a superhuman coder, re-establishing a significant technological lead.
                     </p>
                 </div>
-                <!-- Project 4 -->
+                <!-- Event 4 -->
                 <div class="card p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">#SovereignAI</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Aug 2027: US Hardens Security</h3>
                     <p class="text-gray-600 text-sm">
-                        Nations like Saudi Arabia and China are building their own AI superclusters and fostering domestic chip ecosystems. This strategy is driven by a desire for technological self-sufficiency and national security in the AI arms race.
+                        The US government wiretaps OpenBrain employees, catching the last spy and cutting off China's access to algorithmic secrets.
                     </p>
                 </div>
-                <!-- Project 5 -->
+                <!-- Event 5 -->
                 <div class="card p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">#NeuromorphicComputing</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Aug 2027: The Taiwan Question</h3>
                     <p class="text-gray-600 text-sm">
-                        The development of new, brain-inspired hardware architectures that process information differently than traditional GPUs. These chips promise dramatically higher energy efficiency and are a key area of future AI hardware research.
+                        Hawks in China urge action against Taiwan, the source of over 80% of American AI chips, as a primary option to close the compute gap.
                     </p>
                 </div>
-                <!-- Project 6 -->
+                <!-- Event 6 -->
                 <div class="card p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">#TheComputeBottleneck</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Sept 2027: The Gap Widens</h3>
                     <p class="text-gray-600 text-sm">
-                        While hardware is advancing, the primary bottleneck is power and infrastructure. This focus area looks at how to build the immense data centers and renewable energy sources needed to support the coming explosion in AI demand.
+                        With a 50x R&D multiplier, the US lead becomes nearly insurmountable, forcing China to consider extreme measures to stay in the race.
                     </p>
                 </div>
             </div>
         </section>
     </div>
 
+    <footer class="text-center p-6 mt-8 text-gray-500 text-sm">
+        <p>This dashboard is an interactive visualization of the scenario presented at <a href="https://ai-2027.com/" target="_blank" class="text-blue-600 hover:underline">ai-2027.com</a>.</p>
+        <p><a href="index.html" class="text-blue-600 hover:underline">Back to the Main Forecast</a></p>
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const aiCompute = document.getElementById('aiCompute');
-            const humanScientists = document.getElementById('humanScientists');
-            const computePerScientist = document.getElementById('computePerScientist');
-            const aiComputeValue = document.getElementById('aiComputeValue');
-            const humanScientistsValue = document.getElementById('humanScientistsValue');
-            const computePerScientistValue = document.getElementById('computePerScientistValue');
-            const yearsAheadSpan = document.getElementById('yearsAhead');
+            const usComputeSlider = document.getElementById('us-compute-slider');
+            const chinaComputeSlider = document.getElementById('china-compute-slider');
+            const algoGapSlider = document.getElementById('algo-gap-slider');
 
-            // Chart.js Setup
-            const ctx = document.getElementById('capacityChart').getContext('2d');
-            let capacityChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Human Capacity', 'AI Capacity'],
-                    datasets: [{
-                        label: 'Relative Scientific Capacity',
-                        data: [0, 0], // Initial dummy data
-                        backgroundColor: [
-                            'rgba(182, 182, 182, 0.6)',
-                            'rgba(239, 83, 80, 0.8)'
-                        ],
-                        borderColor: [
-                            'rgba(182, 182, 182, 1)',
-                            'rgba(239, 83, 80, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Scientific Capacity (ExaFLOPS)',
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
+            const usComputeValue = document.getElementById('us-compute-value');
+            const chinaComputeValue = document.getElementById('china-compute-value');
+            const algoGapValue = document.getElementById('algo-gap-value');
+            const powerGapSpan = document.getElementById('power-gap');
+
+            let capacityChart;
+
+            function createRaceChart() {
+                const ctx = document.getElementById('capacityChart').getContext('2d');
+                capacityChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['USA (OpenBrain)', 'China (DeepCent)'],
+                        datasets: [{
+                            label: 'Relative R&D Power',
+                            data: [0, 0],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(239, 83, 80, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(239, 83, 80, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Relative R&D Power',
                                 }
                             }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
+                        },
+                        plugins: {
+                            legend: { display: false }
                         }
                     }
-                }
-            });
-
-            // Function to update all values and the chart
-            function updateAll() {
-                // Update slider values
-                aiComputeValue.textContent = aiCompute.value;
-                humanScientistsValue.textContent = humanScientists.value;
-                computePerScientistValue.textContent = computePerScientist.value;
-
-                // Calculate capacities
-                const totalAICompute = parseFloat(aiCompute.value);
-                const totalHumanCapacity = parseFloat(humanScientists.value) * parseFloat(computePerScientist.value);
-                
-                // Calculate "Years Ahead"
-                let yearsAhead = 0;
-                if (totalHumanCapacity > 0) {
-                    yearsAhead = Math.log(totalAICompute / totalHumanCapacity) / Math.log(1.5) * 2; // Adjusted for a more reasonable scale
-                    yearsAhead = Math.max(0, yearsAhead); // Ensure it's not negative
-                }
-                
-                yearsAheadSpan.textContent = yearsAhead.toFixed(1);
-
-                // Update chart data
-                capacityChart.data.datasets[0].data = [totalHumanCapacity, totalAICompute];
-                capacityChart.update();
+                });
             }
 
-            // Add event listeners to sliders
-            aiCompute.addEventListener('input', updateAll);
-            humanScientists.addEventListener('input', updateAll);
-            computePerScientist.addEventListener('input', updateAll);
+            function updateAll() {
+                const usCompute = parseFloat(usComputeSlider.value);
+                const chinaCompute = parseFloat(chinaComputeSlider.value);
+                const algoGap = parseFloat(algoGapSlider.value);
 
-            // Initial update
+                usComputeValue.textContent = `${usCompute.toFixed(0)}%`;
+                chinaComputeValue.textContent = `${chinaCompute.toFixed(0)}%`;
+                algoGapValue.textContent = `${algoGap.toFixed(0)}`;
+
+                // A simplified model for R&D Power
+                // Power = ComputeShare * Algorithmic_Level
+                // We model Algorithmic_Level as decaying with the gap. A 6-month gap is a significant disadvantage.
+                const usAlgoLevel = 1.0;
+                const chinaAlgoLevel = 1 / (1 + algoGap / 6); // Normalize gap effect
+
+                const usPower = usCompute * usAlgoLevel;
+                const chinaPower = chinaCompute * chinaAlgoLevel;
+
+                let powerGap = 0;
+                if (chinaPower > 0) {
+                    powerGap = usPower / chinaPower;
+                }
+                powerGapSpan.textContent = `${powerGap.toFixed(1)}x`;
+
+                if (capacityChart) {
+                    capacityChart.data.datasets[0].data = [usPower, chinaPower];
+                    capacityChart.update();
+                }
+            }
+
+            createRaceChart();
+            [usComputeSlider, chinaComputeSlider, algoGapSlider].forEach(slider => {
+                slider.addEventListener('input', updateAll);
+            });
             updateAll();
         });
     </script>
