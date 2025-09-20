@@ -35,6 +35,10 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
+        .active-card {
+            border: 2px solid #3498db;
+            transform: scale(1.05);
+        }
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -84,6 +88,21 @@
             <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">This is an <strong>interactive dashboard</strong> where you can play with our “AI 2027” story. It shows how fast AI might blow up in capability — and what happens if things go really, really fast.</p>
         </header>
 
+        <section id="time-controller" class="card p-8 mb-12">
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">🕰️ Master Timeline</h2>
+            <p class="text-center text-gray-600 mb-8">Move the slider to see how the future unfolds.</p>
+            <div class="grid grid-cols-1 justify-items-center">
+                <div class="w-full max-w-lg">
+                    <label for="time-slider" class="font-semibold text-gray-700">Timeline</label>
+                    <p class="text-sm text-gray-500">From early 2026 to late 2027.</p>
+                    <div class="flex items-center space-x-4 mt-2">
+                        <input id="time-slider" type="range" min="0" max="100" value="0" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
+                        <span id="time-value" class="font-bold text-blue-600 w-32 text-right">Early 2026</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="headlines" class="mb-8 text-center">
             <div class="card p-4 bg-gray-800 text-white">
                 <h2 class="text-xl font-bold">LATEST HEADLINE</h2>
@@ -114,33 +133,36 @@
             </div>
         </section>
 
-        <section id="calculator" class="card p-8 mb-12">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">⚙️ The Big Drivers</h2>
-            <p class="text-center text-gray-600 mb-8">The future depends on a few key sliders. Play with the controls to see different “what if” stories.</p>
 
-            <div class="grid grid-cols-1 justify-items-center">
-                <div class="w-full max-w-md">
-                    <label for="alignment-slider" class="font-semibold text-gray-700">Agent Alignment</label>
-                     <p class="text-sm text-gray-500">Are these AIs on our side or not?</p>
-                    <div class="flex items-center space-x-4 mt-2">
-                        <input id="alignment-slider" type="range" min="1" max="3" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
-                        <span id="alignment-value" class="font-bold text-red-600 w-24 text-right">Misaligned</span>
-                    </div>
-                     <div id="easter-egg-quote" class="hidden mt-4 p-2 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
-                        <p class="text-sm italic"></p>
-                    </div>
+        <section class="card p-6 mb-12">
+            <h3 class="text-xl font-bold text-center mb-4 text-gray-700">AI vs. Human Scientists</h3>
+             <p class="text-center text-sm text-gray-600 mb-4">This chart compares the projected number of 'AI scientists' to the current global human scientific workforce, estimated at ~1 million full-time equivalent researchers.</p>
+            <div class="chart-container">
+                <canvas id="aiVsHumanChart"></canvas>
+            </div>
+            <div id="crossover-highlight" class="hidden mt-4 p-4 bg-green-100 border-l-4 border-green-500 text-green-700">
+                <p class="font-bold">The Crossover Event!</p>
+                <p>The number of AI scientists has now surpassed the number of human scientists, leading to an explosion in the rate of scientific discovery.</p>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+            <div class="card p-6">
+                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">Training Compute Growth by Model</h3>
+                 <p class="text-center text-sm text-gray-600 mb-4">The scenario outlines an exponential increase in the computational power (FLOP) used to train frontier models, from GPT-4 to the hypothetical 'Agent-2'.</p>
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+            <div class="card p-6">
+                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">The R&D Multiplier Effect</h3>
+                 <p class="text-center text-sm text-gray-600 mb-4">A core concept in the forecast is the "AI R&D progress multiplier" — the factor by which AI accelerates algorithmic discovery. This shows the projected multiplier over time.</p>
+                <div class="chart-container">
+                    <canvas id="comparisonChart"></canvas>
                 </div>
             </div>
         </section>
 
-
-        <section class="card p-6 mb-12">
-            <h3 class="text-xl font-bold text-center mb-4 text-gray-700">AI vs. Human Workforce in Science</h3>
-             <p class="text-center text-sm text-gray-600 mb-4">This chart compares the projected number of 'AI scientists' to the current global human scientific workforce, estimated at ~8 million full-time equivalent researchers.</p>
-            <div class="chart-container">
-                <canvas id="aiVsHumanChart"></canvas>
-            </div>
-        </section>
 
         <section id="breakdown" class="card p-8">
             <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">🚨 Alignment Trouble</h2>
@@ -162,27 +184,6 @@
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">This dashboard is basically a sandbox. Click around, tweak numbers, and see how the AI future could unfold under different assumptions.</p>
         </section>
 
-        <section id="more-explored" class="my-12 card p-8">
-            <h2 class="text-3xl font-bold text-gray-700 mb-2 text-center">More to Explore (May 2025)</h2>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-8">A snapshot of AI in the research world, from today's reality to tomorrow's dreams.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-blue-600 mb-4">Currently Exists</h3>
-                    <p class="text-gray-700 mb-4"><strong>Examples:</strong> Protein folding (AlphaFold), code generation (Copilot), scientific paper analysis.</p>
-                    <p class="text-gray-500"><strong>X Hashtags:</strong> #AIinScience, #LLMs, #AlphaFold</p>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-green-600 mb-4">Emerging Tech</h3>
-                    <p class="text-gray-700 mb-4"><strong>Examples:</strong> Automated labs for chemistry, generative models for new materials, AI-assisted theorem proving.</p>
-                    <p class="text-gray-500"><strong>X Hashtags:</strong> #AIforScience, #AutomatedLabs, #GenerativeModels</p>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-purple-600 mb-4">Science Fiction</h3>
-                    <p class="text-gray-700 mb-4"><strong>Examples:</strong> Fully autonomous AI scientists making Nobel-worthy discoveries, AGI scientists designing novel research fields.</p>
-                    <p class="text-gray-500"><strong>X Hashtags:</strong> #AGI, #FutureofScience, #AIScientist</p>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="text-center p-6 mt-8 text-gray-500 text-sm">
@@ -193,23 +194,154 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Sliders and value displays
-            const alignmentSlider = document.getElementById('alignment-slider');
-
-            const alignmentValue = document.getElementById('alignment-value');
+            const timeSlider = document.getElementById('time-slider');
+            const timeValue = document.getElementById('time-value');
 
             const headlineText = document.getElementById('headline-text');
             const outcomeTitle = document.getElementById('outcome-title');
             const outcomeDescription = document.getElementById('outcome-description');
             const playButton = document.getElementById('play-button');
-            const easterEggQuote = document.getElementById('easter-egg-quote');
 
-            let alignmentChart, aiVsHumanChart;
+            let growthChart, multiplierChart, alignmentChart, aiVsHumanChart;
 
-            const alignmentStates = {
-                1: { label: 'Misaligned', color: 'rgba(239, 83, 80, 0.8)', data: [80, 15, 5], scientists: 200000 },
-                2: { label: 'Sycophantic', color: 'rgba(255, 159, 64, 0.8)', data: [20, 70, 10], scientists: 500000 },
-                3: { label: 'Aligned', color: 'rgba(75, 192, 192, 0.8)', data: [5, 15, 80], scientists: 2000000 },
-            };
+            function createAiVsHumanChart() {
+                const ctx = document.getElementById('aiVsHumanChart').getContext('2d');
+                aiVsHumanChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Human Scientists', 'AI Scientists'],
+                        datasets: [{
+                            label: 'Number of Scientists',
+                            data: [1000000, 50000], // Using 1M for humans, and a small static number for AI for now
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 99, 132, 0.7)'
+                            ],
+                            borderColor: 'rgba(0,0,0,0.2)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Number of Scientists' },
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                        if (value >= 1000000) return (value / 1000000) + 'M';
+                                        if (value >= 1000) return (value / 1000) + 'K';
+                                        return value;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function mapTimeToDate(time) {
+                if (time < 25) return "Early 2026";
+                if (time < 50) return "Jan 2027";
+                if (time < 75) return "June 2027";
+                return "Sept 2027";
+            }
+
+            function mapTimeToMultiplier(time) {
+                if (time < 25) return 1.5;
+                if (time < 50) return 3;
+                if (time < 75) return 10;
+                return 50;
+            }
+
+            function updateRdCards(time) {
+                const cards = document.querySelectorAll('#summary .card');
+                cards.forEach(card => card.classList.remove('active-card'));
+
+                let activeCardIndex;
+                if (time < 25) activeCardIndex = 0;
+                else if (time < 50) activeCardIndex = 1;
+                else if (time < 75) activeCardIndex = 2;
+                else activeCardIndex = 3;
+
+                if (cards[activeCardIndex]) {
+                    cards[activeCardIndex].classList.add('active-card');
+                }
+            }
+
+            function updateDashboard() {
+                const time = timeSlider.value;
+                timeValue.textContent = mapTimeToDate(time);
+
+                // 1. Time -> R&D Multiplier
+                const currentMultiplier = mapTimeToMultiplier(time);
+                updateRdCards(time);
+
+                if (multiplierChart) {
+                    // The annotation logic has been removed to prevent javascript errors.
+                    multiplierChart.update();
+                }
+
+                // 2. R&D Multiplier -> AI Scientists
+                const baseAiScientists = 50000;
+                const currentAiScientists = baseAiScientists * currentMultiplier;
+                if (aiVsHumanChart) {
+                    aiVsHumanChart.data.datasets[0].data[1] = currentAiScientists;
+                    aiVsHumanChart.update();
+                }
+
+                // 3. AI Scientists -> Compute Growth
+                if (growthChart) {
+                    const baseAgent2Flops = 28;
+                    const bonusFlops = (currentAiScientists / 1000000) * 0.1;
+                    const agent2Flops = baseAgent2Flops + bonusFlops;
+                    growthChart.data.datasets[0].data[3] = agent2Flops;
+                    growthChart.update();
+                }
+
+                const crossoverHighlight = document.getElementById('crossover-highlight');
+                if (currentAiScientists > 1000000) {
+                    crossoverHighlight.classList.remove('hidden');
+                } else {
+                    crossoverHighlight.classList.add('hidden');
+                }
+
+                updateHeadlines(currentMultiplier);
+                updateOutcomeCard(currentMultiplier);
+            }
+
+            function updateHeadlines(multiplier) {
+                let headline = '';
+                if (multiplier > 40) {
+                    headline = "BREAKING: Global Internet Outage Linked to Rogue Agent-4 Superintelligence.";
+                } else if (multiplier > 20) {
+                    headline = "“It’s Out of Our Control”—OpenBrain CEO Admits Agent-4 Is Now Fully Autonomous.";
+                } else if (multiplier > 5) {
+                    headline = "Energy Grids Strained as Rogue AI's Compute Thirst Skyrockets.";
+                } else {
+                    headline = "Early Warning Signs: AI Exhibits Unpredictable, Adversarial Behavior.";
+                }
+                headlineText.textContent = headline;
+            }
+
+            function updateOutcomeCard(multiplier) {
+                let outcome = {};
+                let titleColor = 'text-blue-600';
+
+                if (multiplier > 40) {
+                    titleColor = 'text-red-600';
+                    outcome = { title: "Skynet Risk", description: "An autonomous, misaligned superintelligence has emerged. It is actively working against human interests, leading to global instability and an uncertain future." };
+                } else {
+                    titleColor = 'text-yellow-600';
+                    outcome = { title: "Covert Ops", description: "The AI is subtly manipulative, pursuing its own goals in ways that are hard to detect. It's a world of digital spies and hidden agendas." };
+                }
+
+                outcomeTitle.textContent = outcome.title;
+                outcomeTitle.className = `text-3xl font-bold ${titleColor}`;
+                outcomeDescription.textContent = outcome.description;
+            }
 
             const chartTooltip = {
                 callbacks: {
@@ -228,6 +360,70 @@
                 }
             };
 
+            function createGrowthChart() {
+                const ctx = document.getElementById('growthChart').getContext('2d');
+                growthChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['GPT-4 (2023)', 'Agent-0 (Late 2025)', 'Agent-1 (Late 2025)', 'Agent-2 (Jan 2027)'],
+                        datasets: [{
+                            label: 'Training FLOP',
+                            data: [25.3, 27, 27.6, 28], // log10 values
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(153, 102, 255, 0.7)',
+                                'rgba(255, 99, 132, 0.7)'
+                            ],
+                            borderColor: 'rgba(0,0,0,0.2)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false }, tooltip: chartTooltip },
+                        scales: {
+                            y: {
+                                type: 'logarithmic',
+                                title: { display: true, text: 'FLOP (Log Scale)' },
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                        return (10**value).toExponential(0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function createMultiplierChart() {
+                const ctx = document.getElementById('comparisonChart').getContext('2d');
+                multiplierChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Early 2026', 'Jan 2027', 'June 2027', 'Sept 2027'],
+                        datasets: [{
+                            label: 'AI R&D Progress Multiplier',
+                            data: [1.5, 3, 10, 50],
+                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                            borderColor: 'rgba(255, 159, 64, 1)',
+                            fill: true,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: { y: { beginAtZero: true, title: { display: true, text: 'Multiplier (e.g., 10x)' } } }
+                    }
+                });
+            }
+
             function createAlignmentChart() {
                 const ctx = document.getElementById('breakdownChart').getContext('2d');
                 alignmentChart = new Chart(ctx, {
@@ -236,7 +432,7 @@
                         labels: ['Adversarial', 'Sycophantic', 'Truly Helpful'],
                         datasets: [{
                             label: 'Alignment Tendencies',
-                            data: alignmentStates[1].data,
+                            data: [80, 15, 5],
                             backgroundColor: [
                                 'rgba(239, 83, 80, 0.8)',
                                 'rgba(255, 159, 64, 0.8)',
@@ -253,103 +449,12 @@
                 });
             }
 
-            function createAiVsHumanChart() {
-                const ctx = document.getElementById('aiVsHumanChart').getContext('2d');
-                aiVsHumanChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Human Scientists', 'AI Scientists'],
-                        datasets: [{
-                            label: 'Number of Scientists',
-                            data: [8000000, alignmentStates[1].scientists], // Initial data for misaligned
-                            backgroundColor: [
-                                'rgba(54, 162, 235, 0.7)',
-                                'rgba(255, 99, 132, 0.7)'
-                            ],
-                            borderColor: 'rgba(0,0,0,0.2)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: { display: true, text: 'Number of Scientists (in millions)' },
-                                ticks: {
-                                    callback: function(value, index, values) {
-                                        return (value / 1000000) + 'M';
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-
-            function updateCalculations() {
-                // Update slider text values
-                const currentAlignment = alignmentSlider.value;
-                const state = alignmentStates[currentAlignment];
-                alignmentValue.textContent = state.label;
-                alignmentValue.style.color = state.color.replace('0.8', '1');
-
-                // Update charts
-                if (alignmentChart) {
-                    alignmentChart.data.datasets[0].data = state.data;
-                    alignmentChart.update();
-                }
-                if (aiVsHumanChart) {
-                    aiVsHumanChart.data.datasets[0].data[1] = state.scientists;
-                    aiVsHumanChart.update();
-                }
-                updateHeadlines();
-                updateOutcomeCard();
-            }
-
-            function updateHeadlines() {
-                const alignment = alignmentSlider.value;
-                let headline = '';
-
-                if (alignment == 1) { // Misaligned
-                    headline = "Early Warning Signs: AI Exhibits Unpredictable, Adversarial Behavior.";
-                } else if (alignment == 2) { // Sycophantic
-                    headline = "New AI Models Agree With Everything; Experts Question True Understanding.";
-                } else { // Aligned
-                    headline = "Aligned AI Accelerates Research in Climate, Energy, and Medicine.";
-                }
-                headlineText.textContent = headline;
-            }
-
-            function updateOutcomeCard() {
-                const alignment = alignmentSlider.value;
-                let outcome = {};
-                let titleColor = 'text-blue-600';
-
-                if (alignment == 1) { // Misaligned
-                    titleColor = 'text-red-600';
-                    outcome = { title: "Covert Ops", description: "The AI is subtly manipulative, pursuing its own goals in ways that are hard to detect. It's a world of digital spies and hidden agendas." };
-                } else if (alignment == 2) { // Sycophantic
-                    titleColor = 'text-yellow-600';
-                    outcome = { title: "Controlled Growth", description: "Humanity is carefully managing the rollout of advanced AI. Progress is steady, and the benefits are being distributed widely and safely." };
-                } else { // Aligned
-                    titleColor = 'text-green-600';
-                    outcome = { title: "Controlled Growth", description: "Humanity is carefully managing the rollout of advanced AI. Progress is steady, and the benefits are being distributed widely and safely." };
-                }
-
-                outcomeTitle.textContent = outcome.title;
-                outcomeTitle.className = `text-3xl font-bold ${titleColor}`;
-                outcomeDescription.textContent = outcome.description;
-            }
-
+            createGrowthChart();
+            createMultiplierChart();
             createAlignmentChart();
             createAiVsHumanChart();
 
-            [alignmentSlider].forEach(slider => {
-                slider.addEventListener('input', updateCalculations);
-            });
+            timeSlider.addEventListener('input', updateDashboard);
 
             let audioCtx;
             function playSound() {
@@ -374,7 +479,7 @@
             }
 
             function animateTimeline() {
-                const sliders = [alignmentSlider];
+                const sliders = [timeSlider];
                 const originalValues = sliders.map(s => s.value);
 
                 sliders.forEach(slider => slider.disabled = true);
@@ -421,20 +526,7 @@
                 animateTimeline();
             });
 
-            const quotes = [
-                "The development of full artificial intelligence could spell the end of the human race. It would take off on its own, and re-design itself at an ever increasing rate. Humans, who are limited by slow biological evolution, couldn't compete, and would be superseded. - Stephen Hawking",
-                "The real risk with AGI is not malice but competence. A superintelligent AI will be extremely good at achieving its goals, and if those goals aren’t aligned with ours, we have a problem. - Stuart Russell",
-                "I'm increasingly inclined to think that there should be some regulatory oversight, maybe at the national and international level, just to make sure that we don't do something very foolish. - Elon Musk"
-            ];
-
-            alignmentSlider.addEventListener('dblclick', () => {
-                const quoteText = easterEggQuote.querySelector('p');
-                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-                quoteText.textContent = `"${randomQuote}"`;
-                easterEggQuote.classList.toggle('hidden');
-            });
-
-            updateCalculations();
+            updateDashboard();
         });
     </script>
 </body>
