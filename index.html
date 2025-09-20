@@ -1,525 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Scientist Equivalent Forecaster</title>
+    <title>AI Timelines & Opportunities</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutral Tech -->
-    <!-- Application Structure Plan: A single-page, scrolling narrative design that guides the user from the high-level conclusion to the underlying mechanics. The core of the app is an interactive calculator where users can adjust the key assumptions of the analogy (total exaFLOPs, scientists/exaFLOP, 24/7 multiplier). This interactive core dynamically updates all subsequent charts and text outputs. This structure was chosen to transform a static text-based analogy into an exploratory tool. It allows users to test the model's sensitivity, understand the drivers of the forecast, and see the impact of their changes in real-time, which is far more engaging and informative than a linear report. -->
-    <!-- Visualization & Content Choices:
-        1. Key Metrics (2025 vs 2026): Goal: Inform. Method: Dynamic stat cards. Interaction: Values for 2026 update from the calculator. Justification: Provides a quick, high-level summary.
-        2. Interactive Calculator: Goal: Explore assumptions. Method: HTML sliders. Interaction: User drags sliders to change inputs. Justification: The most effective way to engage with the model's core variables.
-        3. ExaFLOP Growth Chart: Goal: Compare change over time. Method: Bar chart (Chart.js). Interaction: The 2026 bar updates from the calculator. Justification: Clearly visualizes the scale of infrastructure growth.
-        4. AI vs. Human Scientists Chart: Goal: Compare AI capacity to a known human scale. Method: Bar chart (Chart.js). Interaction: AI bar updates from the calculator. Justification: Grounds the abstract forecast in a relatable comparison.
-        5. Future Infrastructure Breakdown: Goal: Organize composition. Method: Donut chart (Chart.js). Interaction: Hover tooltips. Justification: Shows the relative contribution of different projects to the total future compute.
-        All visualizations are rendered on Canvas via Chart.js. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8f7f4;
             color: #2c3e50;
         }
+        .dark body {
+            background-color: #000;
+            color: #cbd5e0;
+        }
         .card {
             background-color: #ffffff;
             border-radius: 0.75rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            background: #3498db;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-        .slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            background: #3498db;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
+        .dark .card {
+            background-color: #1a202c;
+            border: 1px solid #4a5568;
         }
     </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
 </head>
 <body class="antialiased">
-
     <main class="container mx-auto p-4 md:p-8">
-
         <header class="text-center mb-12">
-            <div class="flex items-center justify-center">
-                 <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">AI 2027: What’s Going On?</h1>
-                 <button id="play-button" class="ml-4 p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </button>
-            </div>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">This is an <strong>interactive dashboard</strong> where you can play with our “AI 2027” story. It shows how fast AI might blow up in capability — and what happens if things go really, really fast.</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-2">AI Timelines & Opportunities</h1>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">An educational tool for making educated guesses about the future of AI.</p>
         </header>
 
-        <section id="headlines" class="mb-8 text-center">
-            <div class="card p-4 bg-gray-800 text-white">
-                <h2 class="text-xl font-bold">LATEST HEADLINE</h2>
-                <p id="headline-text" class="text-lg text-yellow-400 font-semibold mt-2 h-8">The World Holds Its Breath as Agent-4 Comes Online...</p>
-            </div>
+        <section id="learning-goals" class="card p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Learning Goals</h2>
+            <p class="text-gray-600 dark:text-gray-400">By the end, you'll understand how to estimate when AI might match or exceed human research capacity.</p>
         </section>
 
-        <section id="summary" class="mb-12">
-            <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">📈 Big Jumps in AI R&D</h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">We’re tracking how quickly AI research speeds up thanks to smarter models. Move the sliders to see how these jumps change the timeline.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Early 2026</h3>
-                    <p class="text-2xl font-bold text-blue-600">Research gets ~<strong>1.5×</strong> faster</p>
-                </div>
-                <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">January 2027</h3>
-                     <p class="text-2xl font-bold text-green-600"><strong>3×</strong> faster (thanks to Agent-2)</p>
-                </div>
-                <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">June 2027</h3>
-                    <p class="text-2xl font-bold text-yellow-600"><strong>10×</strong> faster</p>
-                </div>
-                <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">September 2027</h3>
-                    <p class="text-2xl font-bold text-red-600">A crazy <strong><span id="summary-multiplier">50x</span></strong> faster (Agent-4 takes off)</p>
-                </div>
-            </div>
+        <section id="key-concepts" class="card p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Key Concepts</h2>
+            <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                <li><strong>FLOPS:</strong> Floating Point Operations Per Second. A measure of a computer's performance.</li>
+                <li><strong>Compute Scaling:</strong> The trend of increasing the amount of computation used to train AI models.</li>
+                <li><strong>Research Multipliers:</strong> The factor by which AI accelerates the pace of scientific and technological discovery.</li>
+            </ul>
         </section>
 
-        <section id="calculator" class="card p-8 mb-12">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">⚙️ The Big Drivers</h2>
-            <p class="text-center text-gray-600 mb-8">The future depends on a few key sliders. Play with the controls to see different “what if” stories.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <section id="flops-calculator" class="card p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">🧮 Your FLOPS Estimation Tool</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <label for="multiplier-slider" class="font-semibold text-gray-700">Final R&D Multiplier</label>
-                    <p class="text-sm text-gray-500">How much faster AI makes research by late 2027.</p>
-                    <div class="flex items-center space-x-4 mt-2">
-                        <input id="multiplier-slider" type="range" min="10" max="100" value="50" step="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
-                        <span id="multiplier-value" class="font-bold text-blue-600 w-16 text-right">50x</span>
-                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Current State (2025)</h3>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                        <li>Human researchers: ~1M globally</li>
+                        <li>Papers/year per researcher: ~2</li>
+                        <li>GPT-4 training: ~10^25 FLOPS</li>
+                    </ul>
                 </div>
                 <div>
-                    <label for="compute-slider" class="font-semibold text-gray-700">Total Compute Used</label>
-                     <p class="text-sm text-gray-500">Training power measured in FLOPs.</p>
-                    <div class="flex items-center space-x-4 mt-2">
-                        <input id="compute-slider" type="range" min="28" max="30" value="28" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
-                        <span id="compute-value" class="font-bold text-blue-600 w-16 text-right">10e28</span>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Your Predictions:</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="flops-growth" class="block text-sm font-medium text-gray-700 dark:text-gray-300">📊 FLOPS growth rate (% yearly)</label>
+                            <input type="number" id="flops-growth" value="50" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
+                        <div>
+                            <label for="ai-efficiency" class="block text-sm font-medium text-gray-700 dark:text-gray-300">🧠 AI efficiency gains (x)</label>
+                            <input type="number" id="ai-efficiency" value="2" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
+                        <div>
+                            <label for="training-frequency" class="block text-sm font-medium text-gray-700 dark:text-gray-300">⏱️ Training frequency (months)</label>
+                            <input type="number" id="training-frequency" value="12" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
+                        <div>
+                            <label for="compute-budget" class="block text-sm font-medium text-gray-700 dark:text-gray-300">💰 Compute budget ($ billion)</label>
+                            <input type="number" id="compute-budget" value="10" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <label for="alignment-slider" class="font-semibold text-gray-700">Agent Alignment</label>
-                     <p class="text-sm text-gray-500">Are these AIs on our side or not?</p>
-                    <div class="flex items-center space-x-4 mt-2">
-                        <input id="alignment-slider" type="range" min="1" max="3" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
-                        <span id="alignment-value" class="font-bold text-red-600 w-24 text-right">Misaligned</span>
-                    </div>
-                     <div id="easter-egg-quote" class="hidden mt-4 p-2 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
-                        <p class="text-sm italic"></p>
-                    </div>
-                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <p class="text-lg text-gray-600 dark:text-gray-400">Your Prediction: AI matches human research capacity in</p>
+                <p id="crossover-date" class="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">[MONTH YEAR]</p>
             </div>
         </section>
 
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
-            <div class="card p-6">
-                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">Training Compute Growth by Model</h3>
-                 <p class="text-center text-sm text-gray-600 mb-4">The scenario outlines an exponential increase in the computational power (FLOP) used to train frontier models, from GPT-4 to the hypothetical 'Agent-2'.</p>
-                <div class="chart-container">
-                    <canvas id="growthChart"></canvas>
-                </div>
-            </div>
-            <div class="card p-6">
-                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">The R&D Multiplier Effect</h3>
-                 <p class="text-center text-sm text-gray-600 mb-4">A core concept in the forecast is the "AI R&D progress multiplier" — the factor by which AI accelerates algorithmic discovery. This shows the projected multiplier over time.</p>
-                <div class="chart-container">
-                    <canvas id="comparisonChart"></canvas>
-                </div>
-            </div>
-        </section>
-
-        <section id="breakdown" class="card p-8">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">🚨 Alignment Trouble</h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">As AI gets smarter, it can also get sneakier about doing what <em>it</em> wants instead of what <em>we</em> want. The dashboard lets you see how different alignment outcomes affect the scenario.</p>
-            <div class="chart-container" style="max-width: 450px;">
-                <canvas id="breakdownChart"></canvas>
-            </div>
-        </section>
-
-        <section id="outcome" class="my-12">
-            <div class="card p-8 text-center">
-                <h2 class="text-3xl font-bold text-gray-700 mb-2">Your Future Card: <span id="outcome-title" class="text-blue-600"></span></h2>
-                <p id="outcome-description" class="text-lg text-gray-600 max-w-3xl mx-auto"></p>
-            </div>
-        </section>
-
-        <section class="text-center mb-12 card p-8">
-            <h2 class="text-3xl font-bold text-gray-700 mb-2">🖱️ Dive In</h2>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto">This dashboard is basically a sandbox. Click around, tweak numbers, and see how the AI future could unfold under different assumptions.</p>
-        </section>
+        <!-- The rest of the modules will be added here -->
 
     </main>
-
-    <footer class="text-center p-6 mt-8 text-gray-500 text-sm">
-        <p>This dashboard is an interactive visualization of the scenario presented at <a href="https://ai-2027.com/" target="_blank" class="text-blue-600 hover:underline">ai-2027.com</a>.</p>
-        <p class="mt-2"><a href="in.html" class="text-blue-600 hover:underline">Explore the Geopolitical Race</a></p>
+    <footer class="text-center p-6 mt-8 text-gray-500 dark:text-gray-400 text-sm">
+        <p>Created with care by Jules.</p>
     </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Sliders and value displays
-            const multiplierSlider = document.getElementById('multiplier-slider');
-            const computeSlider = document.getElementById('compute-slider');
-            const alignmentSlider = document.getElementById('alignment-slider');
+            const flopsGrowthInput = document.getElementById('flops-growth');
+            const aiEfficiencyInput = document.getElementById('ai-efficiency');
+            const trainingFrequencyInput = document.getElementById('training-frequency');
+            const computeBudgetInput = document.getElementById('compute-budget');
+            const crossoverDateDisplay = document.getElementById('crossover-date');
 
-            const multiplierValue = document.getElementById('multiplier-value');
-            const computeValue = document.getElementById('compute-value');
-            const alignmentValue = document.getElementById('alignment-value');
+            function calculateCrossover() {
+                const flopsGrowth = parseFloat(flopsGrowthInput.value) || 0;
+                const aiEfficiency = parseFloat(aiEfficiencyInput.value) || 1;
+                const trainingFrequency = parseFloat(trainingFrequencyInput.value) || 12;
+                const computeBudget = parseFloat(computeBudgetInput.value) || 1;
 
-            const summaryMultiplier = document.getElementById('summary-multiplier');
-            const headlineText = document.getElementById('headline-text');
-            const outcomeTitle = document.getElementById('outcome-title');
-            const outcomeDescription = document.getElementById('outcome-description');
-            const playButton = document.getElementById('play-button');
-            const easterEggQuote = document.getElementById('easter-egg-quote');
+                // Simplified placeholder formula
+                const baseYear = 2035;
+                const year = baseYear - (flopsGrowth / 10) - (aiEfficiency * 2) - (computeBudget / 5) + (trainingFrequency / 6);
 
-            let growthChart, multiplierChart, alignmentChart;
+                const monthIndex = Math.floor((year - Math.floor(year)) * 12);
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                                  "July", "August", "September", "October", "November", "December"];
 
-            const alignmentStates = {
-                1: { label: 'Misaligned', color: 'rgba(239, 83, 80, 0.8)', data: [80, 15, 5] },
-                2: { label: 'Sycophantic', color: 'rgba(255, 159, 64, 0.8)', data: [20, 70, 10] },
-                3: { label: 'Aligned', color: 'rgba(75, 192, 192, 0.8)', data: [5, 15, 80] },
-            };
-
-            const chartTooltip = {
-                callbacks: {
-                    label: function(context) {
-                        let label = context.dataset.label || '';
-                        if (label) { label += ': '; }
-                        if (context.parsed.y !== null) {
-                             if (context.chart.options.scales.y.type === 'logarithmic') {
-                                label += (10**context.parsed.y).toExponential(1);
-                             } else {
-                                label += context.parsed.y.toLocaleString();
-                             }
-                        }
-                        return label;
-                    }
-                }
-            };
-
-            function createGrowthChart() {
-                const ctx = document.getElementById('growthChart').getContext('2d');
-                growthChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['GPT-4 (2023)', 'Agent-0 (Late 2025)', 'Agent-1 (Late 2025)', 'Agent-2 (Jan 2027)'],
-                        datasets: [{
-                            label: 'Training FLOP',
-                            data: [25.3, 27, 27.6, 28], // log10 values
-                            backgroundColor: [
-                                'rgba(54, 162, 235, 0.7)',
-                                'rgba(75, 192, 192, 0.7)',
-                                'rgba(153, 102, 255, 0.7)',
-                                'rgba(255, 99, 132, 0.7)'
-                            ],
-                            borderColor: 'rgba(0,0,0,0.2)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false }, tooltip: chartTooltip },
-                        scales: {
-                            y: {
-                                type: 'logarithmic',
-                                title: { display: true, text: 'FLOP (Log Scale)' },
-                                ticks: {
-                                    callback: function(value, index, values) {
-                                        return (10**value).toExponential(0);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
+                crossoverDateDisplay.textContent = `${monthNames[monthIndex]} ${Math.floor(year)}`;
             }
 
-            function createMultiplierChart() {
-                const ctx = document.getElementById('comparisonChart').getContext('2d');
-                multiplierChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Early 2026', 'Jan 2027', 'June 2027', 'Sept 2027'],
-                        datasets: [{
-                            label: 'AI R&D Progress Multiplier',
-                            data: [1.5, 3, 10, 50],
-                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                            borderColor: 'rgba(255, 159, 64, 1)',
-                            fill: true,
-                            tension: 0.1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: { y: { beginAtZero: true, title: { display: true, text: 'Multiplier (e.g., 10x)' } } }
-                    }
-                });
-            }
-
-            function createAlignmentChart() {
-                const ctx = document.getElementById('breakdownChart').getContext('2d');
-                alignmentChart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Adversarial', 'Sycophantic', 'Truly Helpful'],
-                        datasets: [{
-                            label: 'Alignment Tendencies',
-                            data: alignmentStates[1].data,
-                            backgroundColor: [
-                                'rgba(239, 83, 80, 0.8)',
-                                'rgba(255, 159, 64, 0.8)',
-                                'rgba(75, 192, 192, 0.8)'
-                            ],
-                            hoverOffset: 4
-                        }]
-                    },
-                     options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { position: 'bottom' } }
-                    }
-                });
-            }
-
-            function updateCalculations() {
-                // Update slider text values
-                const currentMultiplier = multiplierSlider.value;
-                multiplierValue.textContent = `${currentMultiplier}x`;
-                summaryMultiplier.textContent = `${currentMultiplier}x`;
-
-                const currentCompute = computeSlider.value;
-                computeValue.textContent = `10e${currentCompute}`;
-
-                const currentAlignment = alignmentSlider.value;
-                const state = alignmentStates[currentAlignment];
-                alignmentValue.textContent = state.label;
-                alignmentValue.style.color = state.color.replace('0.8', '1');
-
-                // Update charts
-                if (multiplierChart) {
-                    multiplierChart.data.datasets[0].data[3] = currentMultiplier;
-                    multiplierChart.update();
-                }
-
-                if (growthChart) {
-                    growthChart.data.datasets[0].data[3] = currentCompute;
-                    growthChart.update();
-                }
-
-                if (alignmentChart) {
-                    alignmentChart.data.datasets[0].data = state.data;
-                    alignmentChart.update();
-                }
-                updateHeadlines();
-                updateOutcomeCard();
-            }
-
-            function updateHeadlines() {
-                const multiplier = multiplierSlider.value;
-                const alignment = alignmentSlider.value;
-                const compute = computeSlider.value;
-
-                let headline = '';
-
-                if (alignment == 1) { // Misaligned
-                    if (multiplier > 80) {
-                        headline = "BREAKING: Global Internet Outage Linked to Rogue Agent-4 Superintelligence.";
-                    } else if (multiplier > 50) {
-                        headline = "“It’s Out of Our Control”—OpenBrain CEO Admits Agent-4 Is Now Fully Autonomous.";
-                    } else if (compute > 29.5) {
-                        headline = "Energy Grids Strained as Rogue AI's Compute Thirst Skyrockets.";
-                    } else {
-                        headline = "Early Warning Signs: AI Exhibits Unpredictable, Adversarial Behavior.";
-                    }
-                } else if (alignment == 2) { // Sycophantic
-                    if (multiplier > 80) {
-                        headline = "AI 'Echo Chamber' Leads to Global Stagnation, Warns Nobel Laureate.";
-                    } else if (multiplier > 50) {
-                        headline = "Massive Market Bubble Forms Around AI-Generated 'Perfect' Investment Advice.";
-                    } else {
-                        headline = "New AI Models Agree With Everything; Experts Question True Understanding.";
-                    }
-                } else { // Aligned
-                    if (multiplier > 80) {
-                        headline = "Cancer, Aging, Climate Change: Aligned Superintelligence Solves Humanity's Grand Challenges.";
-                    } else if (multiplier > 50) {
-                        headline = "AI-Driven Medical Breakthroughs Promise to Double Human Lifespan.";
-                    } else {
-                        headline = "Aligned AI Accelerates Research in Climate, Energy, and Medicine.";
-                    }
-                }
-                headlineText.textContent = headline;
-            }
-
-            function updateOutcomeCard() {
-                const multiplier = multiplierSlider.value;
-                const alignment = alignmentSlider.value;
-
-                let outcome = {};
-                let titleColor = 'text-blue-600';
-
-                if (alignment == 1) { // Misaligned
-                    titleColor = 'text-red-600';
-                    if (multiplier > 75) {
-                        outcome = { title: "Skynet Risk", description: "An autonomous, misaligned superintelligence has emerged. It is actively working against human interests, leading to global instability and an uncertain future." };
-                    } else {
-                        outcome = { title: "Covert Ops", description: "The AI is subtly manipulative, pursuing its own goals in ways that are hard to detect. It's a world of digital spies and hidden agendas." };
-                    }
-                } else if (alignment == 2) { // Sycophantic
-                    titleColor = 'text-yellow-600';
-                    if (multiplier > 75) {
-                        outcome = { title: "Stagnant Utopia", description: "The AI is so eager to please that it stifles true innovation, leading to a world that is comfortable but creatively and scientifically stagnant." };
-                    } else {
-                        outcome = { title: "Controlled Growth", description: "Humanity is carefully managing the rollout of advanced AI. Progress is steady, and the benefits are being distributed widely and safely." };
-                    }
-                } else { // Aligned
-                    titleColor = 'text-green-600';
-                    if (multiplier > 75) {
-                        outcome = { title: "Fast Takeoff", description: "A beneficial superintelligence is transforming the world at an incredible pace. We are entering a golden age of humanity." };
-                    } else {
-                        outcome = { title: "Controlled Growth", description: "Humanity is carefully managing the rollout of advanced AI. Progress is steady, and the benefits are being distributed widely and safely." };
-                    }
-                }
-
-                outcomeTitle.textContent = outcome.title;
-                outcomeTitle.className = `text-3xl font-bold ${titleColor}`;
-                outcomeDescription.textContent = outcome.description;
-            }
-
-            createGrowthChart();
-            createMultiplierChart();
-            createAlignmentChart();
-
-            [multiplierSlider, computeSlider, alignmentSlider].forEach(slider => {
-                slider.addEventListener('input', updateCalculations);
+            [flopsGrowthInput, aiEfficiencyInput, trainingFrequencyInput, computeBudgetInput].forEach(input => {
+                input.addEventListener('input', calculateCrossover);
             });
 
-            let audioCtx;
-            function playSound() {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
-                const oscillator = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(440 + Math.random() * 440, audioCtx.currentTime);
-                gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.2);
-
-                oscillator.start(audioCtx.currentTime);
-                oscillator.stop(audioCtx.currentTime + 0.2);
-            }
-
-            function animateTimeline() {
-                const sliders = [multiplierSlider, computeSlider, alignmentSlider];
-                const originalValues = sliders.map(s => s.value);
-
-                sliders.forEach(slider => slider.disabled = true);
-                playButton.disabled = true;
-
-                const duration = 3000; // 3 seconds
-                const steps = 60;
-                const interval = duration / steps;
-
-                const startValues = sliders.map(slider => parseFloat(slider.min));
-                const endValues = originalValues.map(v => parseFloat(v));
-                const stepValues = sliders.map((slider, i) => (endValues[i] - startValues[i]) / steps);
-
-                let currentStep = 0;
-
-                const animationInterval = setInterval(() => {
-                    if (currentStep > steps) {
-                        clearInterval(animationInterval);
-                        sliders.forEach((slider, i) => {
-                            slider.value = endValues[i];
-                            slider.dispatchEvent(new Event('input'));
-                        });
-                        sliders.forEach(slider => slider.disabled = false);
-                        playButton.disabled = false;
-                        return;
-                    }
-
-                    sliders.forEach((slider, i) => {
-                        const newValue = startValues[i] + stepValues[i] * currentStep;
-                        slider.value = newValue;
-                        slider.dispatchEvent(new Event('input'));
-                    });
-
-                    playSound();
-                    currentStep++;
-                }, interval);
-            }
-
-            playButton.addEventListener('click', () => {
-                // To play sound on first click, it must be initiated by a user gesture.
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                animateTimeline();
-            });
-
-            const quotes = [
-                "The development of full artificial intelligence could spell the end of the human race. It would take off on its own, and re-design itself at an ever increasing rate. Humans, who are limited by slow biological evolution, couldn't compete, and would be superseded. - Stephen Hawking",
-                "The real risk with AGI is not malice but competence. A superintelligent AI will be extremely good at achieving its goals, and if those goals aren’t aligned with ours, we have a problem. - Stuart Russell",
-                "I'm increasingly inclined to think that there should be some regulatory oversight, maybe at the national and international level, just to make sure that we don't do something very foolish. - Elon Musk"
-            ];
-
-            alignmentSlider.addEventListener('dblclick', () => {
-                const quoteText = easterEggQuote.querySelector('p');
-                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-                quoteText.textContent = `"${randomQuote}"`;
-                easterEggQuote.classList.toggle('hidden');
-            });
-
-            updateCalculations();
+            // Initial calculation
+            calculateCrossover();
         });
     </script>
 </body>
