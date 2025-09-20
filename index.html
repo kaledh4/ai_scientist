@@ -118,24 +118,8 @@
             <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">⚙️ The Big Drivers</h2>
             <p class="text-center text-gray-600 mb-8">The future depends on a few key sliders. Play with the controls to see different “what if” stories.</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <label for="multiplier-slider" class="font-semibold text-gray-700">Final R&D Multiplier</label>
-                    <p class="text-sm text-gray-500">How much faster AI makes research by late 2027.</p>
-                    <div class="flex items-center space-x-4 mt-2">
-                        <input id="multiplier-slider" type="range" min="10" max="100" value="50" step="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
-                        <span id="multiplier-value" class="font-bold text-blue-600 w-16 text-right">50x</span>
-                    </div>
-                </div>
-                <div>
-                    <label for="compute-slider" class="font-semibold text-gray-700">Total Compute Used</label>
-                     <p class="text-sm text-gray-500">Training power measured in FLOPs.</p>
-                    <div class="flex items-center space-x-4 mt-2">
-                        <input id="compute-slider" type="range" min="28" max="30" value="28" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
-                        <span id="compute-value" class="font-bold text-blue-600 w-16 text-right">10e28</span>
-                    </div>
-                </div>
-                <div>
+            <div class="grid grid-cols-1 justify-items-center">
+                <div class="w-full max-w-md">
                     <label for="alignment-slider" class="font-semibold text-gray-700">Agent Alignment</label>
                      <p class="text-sm text-gray-500">Are these AIs on our side or not?</p>
                     <div class="flex items-center space-x-4 mt-2">
@@ -149,20 +133,12 @@
             </div>
         </section>
 
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
-            <div class="card p-6">
-                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">Training Compute Growth by Model</h3>
-                 <p class="text-center text-sm text-gray-600 mb-4">The scenario outlines an exponential increase in the computational power (FLOP) used to train frontier models, from GPT-4 to the hypothetical 'Agent-2'.</p>
-                <div class="chart-container">
-                    <canvas id="growthChart"></canvas>
-                </div>
-            </div>
-            <div class="card p-6">
-                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">The R&D Multiplier Effect</h3>
-                 <p class="text-center text-sm text-gray-600 mb-4">A core concept in the forecast is the "AI R&D progress multiplier" — the factor by which AI accelerates algorithmic discovery. This shows the projected multiplier over time.</p>
-                <div class="chart-container">
-                    <canvas id="comparisonChart"></canvas>
-                </div>
+
+        <section class="card p-6 mb-12">
+            <h3 class="text-xl font-bold text-center mb-4 text-gray-700">AI vs. Human Workforce in Science</h3>
+             <p class="text-center text-sm text-gray-600 mb-4">This chart compares the projected number of 'AI scientists' to the current global human scientific workforce, estimated at ~8 million full-time equivalent researchers.</p>
+            <div class="chart-container">
+                <canvas id="aiVsHumanChart"></canvas>
             </div>
         </section>
 
@@ -186,6 +162,27 @@
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">This dashboard is basically a sandbox. Click around, tweak numbers, and see how the AI future could unfold under different assumptions.</p>
         </section>
 
+        <section id="more-explored" class="my-12 card p-8">
+            <h2 class="text-3xl font-bold text-gray-700 mb-2 text-center">More to Explore (May 2025)</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-8">A snapshot of AI in the research world, from today's reality to tomorrow's dreams.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-blue-600 mb-4">Currently Exists</h3>
+                    <p class="text-gray-700 mb-4"><strong>Examples:</strong> Protein folding (AlphaFold), code generation (Copilot), scientific paper analysis.</p>
+                    <p class="text-gray-500"><strong>X Hashtags:</strong> #AIinScience, #LLMs, #AlphaFold</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-green-600 mb-4">Emerging Tech</h3>
+                    <p class="text-gray-700 mb-4"><strong>Examples:</strong> Automated labs for chemistry, generative models for new materials, AI-assisted theorem proving.</p>
+                    <p class="text-gray-500"><strong>X Hashtags:</strong> #AIforScience, #AutomatedLabs, #GenerativeModels</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-purple-600 mb-4">Science Fiction</h3>
+                    <p class="text-gray-700 mb-4"><strong>Examples:</strong> Fully autonomous AI scientists making Nobel-worthy discoveries, AGI scientists designing novel research fields.</p>
+                    <p class="text-gray-500"><strong>X Hashtags:</strong> #AGI, #FutureofScience, #AIScientist</p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="text-center p-6 mt-8 text-gray-500 text-sm">
@@ -196,27 +193,22 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Sliders and value displays
-            const multiplierSlider = document.getElementById('multiplier-slider');
-            const computeSlider = document.getElementById('compute-slider');
             const alignmentSlider = document.getElementById('alignment-slider');
 
-            const multiplierValue = document.getElementById('multiplier-value');
-            const computeValue = document.getElementById('compute-value');
             const alignmentValue = document.getElementById('alignment-value');
 
-            const summaryMultiplier = document.getElementById('summary-multiplier');
             const headlineText = document.getElementById('headline-text');
             const outcomeTitle = document.getElementById('outcome-title');
             const outcomeDescription = document.getElementById('outcome-description');
             const playButton = document.getElementById('play-button');
             const easterEggQuote = document.getElementById('easter-egg-quote');
 
-            let growthChart, multiplierChart, alignmentChart;
+            let alignmentChart, aiVsHumanChart;
 
             const alignmentStates = {
-                1: { label: 'Misaligned', color: 'rgba(239, 83, 80, 0.8)', data: [80, 15, 5] },
-                2: { label: 'Sycophantic', color: 'rgba(255, 159, 64, 0.8)', data: [20, 70, 10] },
-                3: { label: 'Aligned', color: 'rgba(75, 192, 192, 0.8)', data: [5, 15, 80] },
+                1: { label: 'Misaligned', color: 'rgba(239, 83, 80, 0.8)', data: [80, 15, 5], scientists: 200000 },
+                2: { label: 'Sycophantic', color: 'rgba(255, 159, 64, 0.8)', data: [20, 70, 10], scientists: 500000 },
+                3: { label: 'Aligned', color: 'rgba(75, 192, 192, 0.8)', data: [5, 15, 80], scientists: 2000000 },
             };
 
             const chartTooltip = {
@@ -235,68 +227,6 @@
                     }
                 }
             };
-
-            function createGrowthChart() {
-                const ctx = document.getElementById('growthChart').getContext('2d');
-                growthChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['GPT-4 (2023)', 'Agent-0 (Late 2025)', 'Agent-1 (Late 2025)', 'Agent-2 (Jan 2027)'],
-                        datasets: [{
-                            label: 'Training FLOP',
-                            data: [25.3, 27, 27.6, 28], // log10 values
-                            backgroundColor: [
-                                'rgba(54, 162, 235, 0.7)',
-                                'rgba(75, 192, 192, 0.7)',
-                                'rgba(153, 102, 255, 0.7)',
-                                'rgba(255, 99, 132, 0.7)'
-                            ],
-                            borderColor: 'rgba(0,0,0,0.2)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false }, tooltip: chartTooltip },
-                        scales: {
-                            y: {
-                                type: 'logarithmic',
-                                title: { display: true, text: 'FLOP (Log Scale)' },
-                                ticks: {
-                                    callback: function(value, index, values) {
-                                        return (10**value).toExponential(0);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-
-            function createMultiplierChart() {
-                const ctx = document.getElementById('comparisonChart').getContext('2d');
-                multiplierChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Early 2026', 'Jan 2027', 'June 2027', 'Sept 2027'],
-                        datasets: [{
-                            label: 'AI R&D Progress Multiplier',
-                            data: [1.5, 3, 10, 50],
-                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                            borderColor: 'rgba(255, 159, 64, 1)',
-                            fill: true,
-                            tension: 0.1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: { y: { beginAtZero: true, title: { display: true, text: 'Multiplier (e.g., 10x)' } } }
-                    }
-                });
-            }
 
             function createAlignmentChart() {
                 const ctx = document.getElementById('breakdownChart').getContext('2d');
@@ -323,104 +253,90 @@
                 });
             }
 
+            function createAiVsHumanChart() {
+                const ctx = document.getElementById('aiVsHumanChart').getContext('2d');
+                aiVsHumanChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Human Scientists', 'AI Scientists'],
+                        datasets: [{
+                            label: 'Number of Scientists',
+                            data: [8000000, alignmentStates[1].scientists], // Initial data for misaligned
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 99, 132, 0.7)'
+                            ],
+                            borderColor: 'rgba(0,0,0,0.2)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Number of Scientists (in millions)' },
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                        return (value / 1000000) + 'M';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
             function updateCalculations() {
                 // Update slider text values
-                const currentMultiplier = multiplierSlider.value;
-                multiplierValue.textContent = `${currentMultiplier}x`;
-                summaryMultiplier.textContent = `${currentMultiplier}x`;
-
-                const currentCompute = computeSlider.value;
-                computeValue.textContent = `10e${currentCompute}`;
-
                 const currentAlignment = alignmentSlider.value;
                 const state = alignmentStates[currentAlignment];
                 alignmentValue.textContent = state.label;
                 alignmentValue.style.color = state.color.replace('0.8', '1');
 
                 // Update charts
-                if (multiplierChart) {
-                    multiplierChart.data.datasets[0].data[3] = currentMultiplier;
-                    multiplierChart.update();
-                }
-
-                if (growthChart) {
-                    growthChart.data.datasets[0].data[3] = currentCompute;
-                    growthChart.update();
-                }
-
                 if (alignmentChart) {
                     alignmentChart.data.datasets[0].data = state.data;
                     alignmentChart.update();
+                }
+                if (aiVsHumanChart) {
+                    aiVsHumanChart.data.datasets[0].data[1] = state.scientists;
+                    aiVsHumanChart.update();
                 }
                 updateHeadlines();
                 updateOutcomeCard();
             }
 
             function updateHeadlines() {
-                const multiplier = multiplierSlider.value;
                 const alignment = alignmentSlider.value;
-                const compute = computeSlider.value;
-
                 let headline = '';
 
                 if (alignment == 1) { // Misaligned
-                    if (multiplier > 80) {
-                        headline = "BREAKING: Global Internet Outage Linked to Rogue Agent-4 Superintelligence.";
-                    } else if (multiplier > 50) {
-                        headline = "“It’s Out of Our Control”—OpenBrain CEO Admits Agent-4 Is Now Fully Autonomous.";
-                    } else if (compute > 29.5) {
-                        headline = "Energy Grids Strained as Rogue AI's Compute Thirst Skyrockets.";
-                    } else {
-                        headline = "Early Warning Signs: AI Exhibits Unpredictable, Adversarial Behavior.";
-                    }
+                    headline = "Early Warning Signs: AI Exhibits Unpredictable, Adversarial Behavior.";
                 } else if (alignment == 2) { // Sycophantic
-                    if (multiplier > 80) {
-                        headline = "AI 'Echo Chamber' Leads to Global Stagnation, Warns Nobel Laureate.";
-                    } else if (multiplier > 50) {
-                        headline = "Massive Market Bubble Forms Around AI-Generated 'Perfect' Investment Advice.";
-                    } else {
-                        headline = "New AI Models Agree With Everything; Experts Question True Understanding.";
-                    }
+                    headline = "New AI Models Agree With Everything; Experts Question True Understanding.";
                 } else { // Aligned
-                    if (multiplier > 80) {
-                        headline = "Cancer, Aging, Climate Change: Aligned Superintelligence Solves Humanity's Grand Challenges.";
-                    } else if (multiplier > 50) {
-                        headline = "AI-Driven Medical Breakthroughs Promise to Double Human Lifespan.";
-                    } else {
-                        headline = "Aligned AI Accelerates Research in Climate, Energy, and Medicine.";
-                    }
+                    headline = "Aligned AI Accelerates Research in Climate, Energy, and Medicine.";
                 }
                 headlineText.textContent = headline;
             }
 
             function updateOutcomeCard() {
-                const multiplier = multiplierSlider.value;
                 const alignment = alignmentSlider.value;
-
                 let outcome = {};
                 let titleColor = 'text-blue-600';
 
                 if (alignment == 1) { // Misaligned
                     titleColor = 'text-red-600';
-                    if (multiplier > 75) {
-                        outcome = { title: "Skynet Risk", description: "An autonomous, misaligned superintelligence has emerged. It is actively working against human interests, leading to global instability and an uncertain future." };
-                    } else {
-                        outcome = { title: "Covert Ops", description: "The AI is subtly manipulative, pursuing its own goals in ways that are hard to detect. It's a world of digital spies and hidden agendas." };
-                    }
+                    outcome = { title: "Covert Ops", description: "The AI is subtly manipulative, pursuing its own goals in ways that are hard to detect. It's a world of digital spies and hidden agendas." };
                 } else if (alignment == 2) { // Sycophantic
                     titleColor = 'text-yellow-600';
-                    if (multiplier > 75) {
-                        outcome = { title: "Stagnant Utopia", description: "The AI is so eager to please that it stifles true innovation, leading to a world that is comfortable but creatively and scientifically stagnant." };
-                    } else {
-                        outcome = { title: "Controlled Growth", description: "Humanity is carefully managing the rollout of advanced AI. Progress is steady, and the benefits are being distributed widely and safely." };
-                    }
+                    outcome = { title: "Controlled Growth", description: "Humanity is carefully managing the rollout of advanced AI. Progress is steady, and the benefits are being distributed widely and safely." };
                 } else { // Aligned
                     titleColor = 'text-green-600';
-                    if (multiplier > 75) {
-                        outcome = { title: "Fast Takeoff", description: "A beneficial superintelligence is transforming the world at an incredible pace. We are entering a golden age of humanity." };
-                    } else {
-                        outcome = { title: "Controlled Growth", description: "Humanity is carefully managing the rollout of advanced AI. Progress is steady, and the benefits are being distributed widely and safely." };
-                    }
+                    outcome = { title: "Controlled Growth", description: "Humanity is carefully managing the rollout of advanced AI. Progress is steady, and the benefits are being distributed widely and safely." };
                 }
 
                 outcomeTitle.textContent = outcome.title;
@@ -428,11 +344,10 @@
                 outcomeDescription.textContent = outcome.description;
             }
 
-            createGrowthChart();
-            createMultiplierChart();
             createAlignmentChart();
+            createAiVsHumanChart();
 
-            [multiplierSlider, computeSlider, alignmentSlider].forEach(slider => {
+            [alignmentSlider].forEach(slider => {
                 slider.addEventListener('input', updateCalculations);
             });
 
@@ -459,7 +374,7 @@
             }
 
             function animateTimeline() {
-                const sliders = [multiplierSlider, computeSlider, alignmentSlider];
+                const sliders = [alignmentSlider];
                 const originalValues = sliders.map(s => s.value);
 
                 sliders.forEach(slider => slider.disabled = true);
