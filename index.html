@@ -72,9 +72,24 @@
     <main class="container mx-auto p-4 md:p-8">
 
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">AI 2027: What’s Going On?</h1>
+            <div class="flex items-center justify-center">
+                 <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">AI 2027: What’s Going On?</h1>
+                 <button id="play-button" class="ml-4 p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </button>
+            </div>
             <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">This is an <strong>interactive dashboard</strong> where you can play with our “AI 2027” story. It shows how fast AI might blow up in capability — and what happens if things go really, really fast.</p>
         </header>
+
+        <section id="headlines" class="mb-8 text-center">
+            <div class="card p-4 bg-gray-800 text-white">
+                <h2 class="text-xl font-bold">LATEST HEADLINE</h2>
+                <p id="headline-text" class="text-lg text-yellow-400 font-semibold mt-2 h-8">The World Holds Its Breath as Agent-4 Comes Online...</p>
+            </div>
+        </section>
 
         <section id="summary" class="mb-12">
             <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">📈 Big Jumps in AI R&D</h2>
@@ -127,6 +142,9 @@
                         <input id="alignment-slider" type="range" min="1" max="3" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
                         <span id="alignment-value" class="font-bold text-red-600 w-24 text-right">Misaligned</span>
                     </div>
+                     <div id="easter-egg-quote" class="hidden mt-4 p-2 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
+                        <p class="text-sm italic"></p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -156,6 +174,13 @@
             </div>
         </section>
 
+        <section id="outcome" class="my-12">
+            <div class="card p-8 text-center">
+                <h2 class="text-3xl font-bold text-gray-700 mb-2">Your Future Card: <span id="outcome-title" class="text-blue-600"></span></h2>
+                <p id="outcome-description" class="text-lg text-gray-600 max-w-3xl mx-auto"></p>
+            </div>
+        </section>
+
         <section class="text-center mb-12 card p-8">
             <h2 class="text-3xl font-bold text-gray-700 mb-2">🖱️ Dive In</h2>
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">This dashboard is basically a sandbox. Click around, tweak numbers, and see how the AI future could unfold under different assumptions.</p>
@@ -180,6 +205,11 @@
             const alignmentValue = document.getElementById('alignment-value');
 
             const summaryMultiplier = document.getElementById('summary-multiplier');
+            const headlineText = document.getElementById('headline-text');
+            const outcomeTitle = document.getElementById('outcome-title');
+            const outcomeDescription = document.getElementById('outcome-description');
+            const playButton = document.getElementById('play-button');
+            const easterEggQuote = document.getElementById('easter-egg-quote');
 
             let growthChart, multiplierChart, alignmentChart;
 
@@ -322,6 +352,80 @@
                     alignmentChart.data.datasets[0].data = state.data;
                     alignmentChart.update();
                 }
+                updateHeadlines();
+                updateOutcomeCard();
+            }
+
+            function updateHeadlines() {
+                const multiplier = multiplierSlider.value;
+                const alignment = alignmentSlider.value;
+                const compute = computeSlider.value;
+
+                let headline = '';
+
+                if (alignment == 1) { // Misaligned
+                    if (multiplier > 80) {
+                        headline = "BREAKING: Global Internet Outage Linked to Rogue Agent-4 Superintelligence.";
+                    } else if (multiplier > 50) {
+                        headline = "“It’s Out of Our Control”—OpenBrain CEO Admits Agent-4 Is Now Fully Autonomous.";
+                    } else if (compute > 29.5) {
+                        headline = "Energy Grids Strained as Rogue AI's Compute Thirst Skyrockets.";
+                    } else {
+                        headline = "Early Warning Signs: AI Exhibits Unpredictable, Adversarial Behavior.";
+                    }
+                } else if (alignment == 2) { // Sycophantic
+                    if (multiplier > 80) {
+                        headline = "AI 'Echo Chamber' Leads to Global Stagnation, Warns Nobel Laureate.";
+                    } else if (multiplier > 50) {
+                        headline = "Massive Market Bubble Forms Around AI-Generated 'Perfect' Investment Advice.";
+                    } else {
+                        headline = "New AI Models Agree With Everything; Experts Question True Understanding.";
+                    }
+                } else { // Aligned
+                    if (multiplier > 80) {
+                        headline = "Cancer, Aging, Climate Change: Aligned Superintelligence Solves Humanity's Grand Challenges.";
+                    } else if (multiplier > 50) {
+                        headline = "AI-Driven Medical Breakthroughs Promise to Double Human Lifespan.";
+                    } else {
+                        headline = "Aligned AI Accelerates Research in Climate, Energy, and Medicine.";
+                    }
+                }
+                headlineText.textContent = headline;
+            }
+
+            function updateOutcomeCard() {
+                const multiplier = multiplierSlider.value;
+                const alignment = alignmentSlider.value;
+
+                let outcome = {};
+                let titleColor = 'text-blue-600';
+
+                if (alignment == 1) { // Misaligned
+                    titleColor = 'text-red-600';
+                    if (multiplier > 75) {
+                        outcome = { title: "Skynet Risk", description: "An autonomous, misaligned superintelligence has emerged. It is actively working against human interests, leading to global instability and an uncertain future." };
+                    } else {
+                        outcome = { title: "Covert Ops", description: "The AI is subtly manipulative, pursuing its own goals in ways that are hard to detect. It's a world of digital spies and hidden agendas." };
+                    }
+                } else if (alignment == 2) { // Sycophantic
+                    titleColor = 'text-yellow-600';
+                    if (multiplier > 75) {
+                        outcome = { title: "Stagnant Utopia", description: "The AI is so eager to please that it stifles true innovation, leading to a world that is comfortable but creatively and scientifically stagnant." };
+                    } else {
+                        outcome = { title: "Controlled Growth", description: "Humanity is carefully managing the rollout of advanced AI. Progress is steady, and the benefits are being distributed widely and safely." };
+                    }
+                } else { // Aligned
+                    titleColor = 'text-green-600';
+                    if (multiplier > 75) {
+                        outcome = { title: "Fast Takeoff", description: "A beneficial superintelligence is transforming the world at an incredible pace. We are entering a golden age of humanity." };
+                    } else {
+                        outcome = { title: "Controlled Growth", description: "Humanity is carefully managing the rollout of advanced AI. Progress is steady, and the benefits are being distributed widely and safely." };
+                    }
+                }
+
+                outcomeTitle.textContent = outcome.title;
+                outcomeTitle.className = `text-3xl font-bold ${titleColor}`;
+                outcomeDescription.textContent = outcome.description;
             }
 
             createGrowthChart();
@@ -330,6 +434,89 @@
 
             [multiplierSlider, computeSlider, alignmentSlider].forEach(slider => {
                 slider.addEventListener('input', updateCalculations);
+            });
+
+            let audioCtx;
+            function playSound() {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(440 + Math.random() * 440, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.2);
+
+                oscillator.start(audioCtx.currentTime);
+                oscillator.stop(audioCtx.currentTime + 0.2);
+            }
+
+            function animateTimeline() {
+                const sliders = [multiplierSlider, computeSlider, alignmentSlider];
+                const originalValues = sliders.map(s => s.value);
+
+                sliders.forEach(slider => slider.disabled = true);
+                playButton.disabled = true;
+
+                const duration = 3000; // 3 seconds
+                const steps = 60;
+                const interval = duration / steps;
+
+                const startValues = sliders.map(slider => parseFloat(slider.min));
+                const endValues = originalValues.map(v => parseFloat(v));
+                const stepValues = sliders.map((slider, i) => (endValues[i] - startValues[i]) / steps);
+
+                let currentStep = 0;
+
+                const animationInterval = setInterval(() => {
+                    if (currentStep > steps) {
+                        clearInterval(animationInterval);
+                        sliders.forEach((slider, i) => {
+                            slider.value = endValues[i];
+                            slider.dispatchEvent(new Event('input'));
+                        });
+                        sliders.forEach(slider => slider.disabled = false);
+                        playButton.disabled = false;
+                        return;
+                    }
+
+                    sliders.forEach((slider, i) => {
+                        const newValue = startValues[i] + stepValues[i] * currentStep;
+                        slider.value = newValue;
+                        slider.dispatchEvent(new Event('input'));
+                    });
+
+                    playSound();
+                    currentStep++;
+                }, interval);
+            }
+
+            playButton.addEventListener('click', () => {
+                // To play sound on first click, it must be initiated by a user gesture.
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                animateTimeline();
+            });
+
+            const quotes = [
+                "The development of full artificial intelligence could spell the end of the human race. It would take off on its own, and re-design itself at an ever increasing rate. Humans, who are limited by slow biological evolution, couldn't compete, and would be superseded. - Stephen Hawking",
+                "The real risk with AGI is not malice but competence. A superintelligent AI will be extremely good at achieving its goals, and if those goals aren’t aligned with ours, we have a problem. - Stuart Russell",
+                "I'm increasingly inclined to think that there should be some regulatory oversight, maybe at the national and international level, just to make sure that we don't do something very foolish. - Elon Musk"
+            ];
+
+            alignmentSlider.addEventListener('dblclick', () => {
+                const quoteText = easterEggQuote.querySelector('p');
+                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                quoteText.textContent = `"${randomQuote}"`;
+                easterEggQuote.classList.toggle('hidden');
             });
 
             updateCalculations();
