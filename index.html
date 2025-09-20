@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,11 +25,18 @@
             background-color: #f8f7f4;
             color: #2c3e50;
         }
+        .dark body {
+            background-color: #1a202c;
+            color: #cbd5e0;
+        }
         .card {
             background-color: #ffffff;
             border-radius: 0.75rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .dark .card {
+            background-color: #2d3748;
         }
         .card:hover {
             transform: translateY(-5px);
@@ -77,15 +84,15 @@
 
         <header class="text-center mb-12">
             <div class="flex items-center justify-center">
-                 <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">AI 2027: What’s Going On?</h1>
-                 <button id="play-button" class="ml-4 p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                 <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-2">AI 2027: What’s Going On?</h1>
+                 <button id="play-button" class="ml-4 p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </button>
             </div>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">This is an <strong>interactive dashboard</strong> where you can play with our “AI 2027” story. It shows how fast AI might blow up in capability — and what happens if things go really, really fast.</p>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">This is an <strong>interactive dashboard</strong> where you can play with our “AI 2027” story. It shows how fast AI might blow up in capability — and what happens if things go really, really fast.</p>
         </header>
 
         <section id="time-controller" class="card p-8 mb-12">
@@ -104,30 +111,30 @@
         </section>
 
         <section id="headlines" class="mb-8 text-center">
-            <div class="card p-4 bg-gray-800 text-white">
+            <div class="card p-4 bg-gray-800 text-white dark:bg-gray-700">
                 <h2 class="text-xl font-bold">LATEST HEADLINE</h2>
                 <p id="headline-text" class="text-lg text-yellow-400 font-semibold mt-2 h-8">The World Holds Its Breath as Agent-4 Comes Online...</p>
             </div>
         </section>
 
         <section id="summary" class="mb-12">
-            <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">📈 Big Jumps in AI R&D</h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">We’re tracking how quickly AI research speeds up thanks to smarter models. Move the sliders to see how these jumps change the timeline.</p>
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-700 dark:text-gray-200">📈 Big Jumps in AI R&D</h2>
+            <p class="text-center text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">We’re tracking how quickly AI research speeds up thanks to smarter models. Move the sliders to see how these jumps change the timeline.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Early 2026</h3>
+                    <h3 class="text-lg font-semibold text-gray-500 dark:text-gray-400 mb-2">Early 2026</h3>
                     <p class="text-2xl font-bold text-blue-600">Research gets ~<strong>1.5×</strong> faster</p>
                 </div>
                 <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">January 2027</h3>
+                    <h3 class="text-lg font-semibold text-gray-500 dark:text-gray-400 mb-2">January 2027</h3>
                      <p class="text-2xl font-bold text-green-600"><strong>3×</strong> faster (thanks to Agent-2)</p>
                 </div>
                 <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">June 2027</h3>
+                    <h3 class="text-lg font-semibold text-gray-500 dark:text-gray-400 mb-2">June 2027</h3>
                     <p class="text-2xl font-bold text-yellow-600"><strong>10×</strong> faster</p>
                 </div>
                 <div class="card p-6 flex flex-col items-center text-center">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">September 2027</h3>
+                    <h3 class="text-lg font-semibold text-gray-500 dark:text-gray-400 mb-2">September 2027</h3>
                     <p class="text-2xl font-bold text-red-600">A crazy <strong><span id="summary-multiplier">50x</span></strong> faster (Agent-4 takes off)</p>
                 </div>
             </div>
@@ -135,8 +142,8 @@
 
 
         <section class="card p-6 mb-12">
-            <h3 class="text-xl font-bold text-center mb-4 text-gray-700">AI vs. Human Scientists</h3>
-             <p class="text-center text-sm text-gray-600 mb-4">This chart compares the projected number of 'AI scientists' to the current global human scientific workforce, estimated at ~1 million full-time equivalent researchers.</p>
+            <h3 class="text-xl font-bold text-center mb-4 text-gray-700 dark:text-gray-200">AI vs. Human Scientists</h3>
+             <p class="text-center text-sm text-gray-600 dark:text-gray-400 mb-4">This chart compares the projected number of 'AI scientists' to the current global human scientific workforce, estimated at ~1 million full-time equivalent researchers.</p>
             <div class="chart-container">
                 <canvas id="aiVsHumanChart"></canvas>
             </div>
@@ -148,15 +155,15 @@
 
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
             <div class="card p-6">
-                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">Training Compute Growth by Model</h3>
-                 <p class="text-center text-sm text-gray-600 mb-4">The scenario outlines an exponential increase in the computational power (FLOP) used to train frontier models, from GPT-4 to the hypothetical 'Agent-2'.</p>
+                <h3 class="text-xl font-bold text-center mb-4 text-gray-700 dark:text-gray-200">Training Compute Growth by Model</h3>
+                 <p class="text-center text-sm text-gray-600 dark:text-gray-400 mb-4">The scenario outlines an exponential increase in the computational power (FLOP) used to train frontier models, from GPT-4 to the hypothetical 'Agent-2'.</p>
                 <div class="chart-container">
                     <canvas id="growthChart"></canvas>
                 </div>
             </div>
             <div class="card p-6">
-                <h3 class="text-xl font-bold text-center mb-4 text-gray-700">The R&D Multiplier Effect</h3>
-                 <p class="text-center text-sm text-gray-600 mb-4">A core concept in the forecast is the "AI R&D progress multiplier" — the factor by which AI accelerates algorithmic discovery. This shows the projected multiplier over time.</p>
+                <h3 class="text-xl font-bold text-center mb-4 text-gray-700 dark:text-gray-200">The R&D Multiplier Effect</h3>
+                 <p class="text-center text-sm text-gray-600 dark:text-gray-400 mb-4">A core concept in the forecast is the "AI R&D progress multiplier" — the factor by which AI accelerates algorithmic discovery. This shows the projected multiplier over time.</p>
                 <div class="chart-container">
                     <canvas id="comparisonChart"></canvas>
                 </div>
@@ -165,8 +172,8 @@
 
 
         <section id="breakdown" class="card p-8">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">🚨 Alignment Trouble</h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">As AI gets smarter, it can also get sneakier about doing what <em>it</em> wants instead of what <em>we</em> want. The dashboard lets you see how different alignment outcomes affect the scenario.</p>
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700 dark:text-gray-200">🚨 Alignment Trouble</h2>
+            <p class="text-center text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">As AI gets smarter, it can also get sneakier about doing what <em>it</em> wants instead of what <em>we</em> want. The dashboard lets you see how different alignment outcomes affect the scenario.</p>
             <div class="chart-container" style="max-width: 450px;">
                 <canvas id="breakdownChart"></canvas>
             </div>
@@ -174,25 +181,27 @@
 
         <section id="outcome" class="my-12">
             <div class="card p-8 text-center">
-                <h2 class="text-3xl font-bold text-gray-700 mb-2">Your Future Card: <span id="outcome-title" class="text-blue-600"></span></h2>
-                <p id="outcome-description" class="text-lg text-gray-600 max-w-3xl mx-auto"></p>
+                <h2 class="text-3xl font-bold text-gray-700 dark:text-gray-200 mb-2">Your Future Card: <span id="outcome-title" class="text-blue-600"></span></h2>
+                <p id="outcome-description" class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto"></p>
             </div>
         </section>
 
         <section class="text-center mb-12 card p-8">
-            <h2 class="text-3xl font-bold text-gray-700 mb-2">🖱️ Dive In</h2>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto">This dashboard is basically a sandbox. Click around, tweak numbers, and see how the AI future could unfold under different assumptions.</p>
+            <h2 class="text-3xl font-bold text-gray-700 dark:text-gray-200 mb-2">🖱️ Dive In</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">This dashboard is basically a sandbox. Click around, tweak numbers, and see how the AI future could unfold under different assumptions.</p>
         </section>
 
     </main>
 
-    <footer class="text-center p-6 mt-8 text-gray-500 text-sm">
-        <p>This dashboard is an interactive visualization of the scenario presented at <a href="https://ai-2027.com/" target="_blank" class="text-blue-600 hover:underline">ai-2027.com</a>.</p>
-        <p class="mt-2"><a href="in.html" class="text-blue-600 hover:underline">Explore the Geopolitical Race</a></p>
+    <footer class="text-center p-6 mt-8 text-gray-500 dark:text-gray-400 text-sm">
+        <p>This dashboard is an interactive visualization of the scenario presented at <a href="https://ai-2027.com/" target="_blank" class="text-blue-600 hover:underline dark:text-blue-400">ai-2027.com</a>.</p>
+        <p class="mt-2"><a href="in.html" class="text-blue-600 hover:underline dark:text-blue-400">Explore the Geopolitical Race</a></p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            Chart.defaults.color = '#cbd5e0';
+            Chart.defaults.borderColor = '#4a5568';
             // Sliders and value displays
             const timeSlider = document.getElementById('time-slider');
             const timeValue = document.getElementById('time-value');

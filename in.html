@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +16,10 @@
             background-color: #f7f3e9;
             color: #3b2c26;
         }
+        .dark body {
+            background-color: #1a202c;
+            color: #cbd5e0;
+        }
         .container {
             max-width: 900px;
         }
@@ -24,6 +28,9 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
             padding: 2rem;
+        }
+        .dark .card {
+            background-color: #2d3748;
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -45,10 +52,10 @@
 <body class="p-6 md:p-12">
     <div class="container mx-auto">
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 dark:text-white">
                 🌍 The AI Arms Race: US vs China
             </h1>
-            <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+            <p class="text-xl text-gray-700 dark:text-gray-400 max-w-3xl mx-auto">
                 We’re also showing the big-picture race: the US controls about <strong>70%</strong> of compute, while China has <strong>12%</strong> and trails by about <strong>6 months</strong> on algorithms.
             </p>
         </header>
@@ -56,29 +63,29 @@
         <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Left Panel: Calculator -->
             <div class="lg:col-span-2 card">
-                <h2 class="text-2xl font-bold mb-4">Geopolitical Race Dynamics</h2>
+                <h2 class="text-2xl font-bold mb-4 dark:text-white">Geopolitical Race Dynamics</h2>
 
                 <div class="space-y-6">
                     <div>
-                        <label for="us-compute-slider" class="block text-gray-700 font-semibold mb-2">
+                        <label for="us-compute-slider" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
                             US Compute Share
-                            <span id="us-compute-value" class="float-right text-sm text-gray-500">70%</span>
+                            <span id="us-compute-value" class="float-right text-sm text-gray-500 dark:text-gray-400">70%</span>
                         </label>
                         <input type="range" id="us-compute-slider" min="10" max="90" value="70" class="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer">
                     </div>
 
                     <div>
-                        <label for="china-compute-slider" class="block text-gray-700 font-semibold mb-2">
+                        <label for="china-compute-slider" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
                             China Compute Share
-                            <span id="china-compute-value" class="float-right text-sm text-gray-500">12%</span>
+                            <span id="china-compute-value" class="float-right text-sm text-gray-500 dark:text-gray-400">12%</span>
                         </label>
                         <input type="range" id="china-compute-slider" min="5" max="50" value="12" class="w-full h-2 bg-red-200 rounded-lg appearance-none cursor-pointer">
                     </div>
 
                     <div>
-                        <label for="algo-gap-slider" class="block text-gray-700 font-semibold mb-2">
+                        <label for="algo-gap-slider" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
                             China's Algorithmic Lag (Months)
-                            <span id="algo-gap-value" class="float-right text-sm text-gray-500">6</span>
+                            <span id="algo-gap-value" class="float-right text-sm text-gray-500 dark:text-gray-400">6</span>
                         </label>
                         <input type="range" id="algo-gap-slider" min="0" max="24" value="6" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                     </div>
@@ -86,14 +93,14 @@
 
                 <!-- Results Display -->
                 <div class="text-center mt-8">
-                    <p class="text-gray-700 text-lg">
+                    <p class="text-gray-700 dark:text-gray-300 text-lg">
                         Relative Power Projection:
                     </p>
                     <div class="relative inline-block mt-2">
                         <span id="power-gap" class="text-6xl md:text-8xl font-bold text-gradient">
                             10.9x
                         </span>
-                        <span class="absolute right-0 bottom-0 text-xl font-bold text-gray-500">
+                        <span class="absolute right-0 bottom-0 text-xl font-bold text-gray-500 dark:text-gray-400">
                             US Lead
                         </span>
                     </div>
@@ -102,7 +109,7 @@
 
             <!-- Right Panel: Visualization -->
             <div class="lg:col-span-1 card">
-                <h2 class="text-2xl font-bold mb-4 text-center">R&D Progress Rate</h2>
+                <h2 class="text-2xl font-bold mb-4 text-center dark:text-white">R&D Progress Rate</h2>
                 <div class="p-4">
                     <canvas id="capacityChart"></canvas>
                 </div>
@@ -111,43 +118,45 @@
 
         <!-- Drivers of Advancement Section -->
         <section class="mt-16">
-            <h2 class="text-3xl font-bold text-center mb-8">Key Moments in the Race</h2>
+            <h2 class="text-3xl font-bold text-center mb-8 dark:text-white">Key Moments in the Race</h2>
             <div class="space-y-4">
                 <!-- Event 1 -->
                 <div class="card p-4">
-                    <p class="text-gray-700"><strong>Mid-2026:</strong> China launches “DeepCent” to catch up.</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Mid-2026:</strong> China launches “DeepCent” to catch up.</p>
                 </div>
                 <!-- Event 2 -->
                 <div class="card p-4">
-                    <p class="text-gray-700"><strong>Feb 2027:</strong> China steals Agent-2’s weights.</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Feb 2027:</strong> China steals Agent-2’s weights.</p>
                 </div>
                 <!-- Event 3 -->
                 <div class="card p-4">
-                     <p class="text-gray-700"><strong>Mar 2027:</strong> US races ahead with Agent-3.</p>
+                     <p class="text-gray-700 dark:text-gray-300"><strong>Mar 2027:</strong> US races ahead with Agent-3.</p>
                 </div>
                 <!-- Event 4 -->
                 <div class="card p-4">
-                     <p class="text-gray-700"><strong>Aug 2027:</strong> US cracks down on spies.</p>
+                     <p class="text-gray-700 dark:text-gray-300"><strong>Aug 2027:</strong> US cracks down on spies.</p>
                 </div>
                 <!-- Event 5 -->
                 <div class="card p-4">
-                     <p class="text-gray-700"><strong>Taiwan Question:</strong> Chips become a geopolitical flashpoint.</p>
+                     <p class="text-gray-700 dark:text-gray-300"><strong>Taiwan Question:</strong> Chips become a geopolitical flashpoint.</p>
                 </div>
                 <!-- Event 6 -->
                 <div class="card p-4">
-                    <p class="text-gray-700">By <strong>Sept 2027,</strong> the US lead is nearly uncatchable — unless something drastic happens.</p>
+                    <p class="text-gray-700 dark:text-gray-300">By <strong>Sept 2027,</strong> the US lead is nearly uncatchable — unless something drastic happens.</p>
                 </div>
             </div>
         </section>
     </div>
 
-    <footer class="text-center p-6 mt-8 text-gray-500 text-sm">
-        <p>This dashboard is an interactive visualization of the scenario presented at <a href="https://ai-2027.com/" target="_blank" class="text-blue-600 hover:underline">ai-2027.com</a>.</p>
-        <p><a href="index.html" class="text-blue-600 hover:underline">Back to the Main Forecast</a></p>
+    <footer class="text-center p-6 mt-8 text-gray-500 dark:text-gray-400 text-sm">
+        <p>This dashboard is an interactive visualization of the scenario presented at <a href="https://ai-2027.com/" target="_blank" class="text-blue-600 hover:underline dark:text-blue-400">ai-2027.com</a>.</p>
+        <p><a href="index.html" class="text-blue-600 hover:underline dark:text-blue-400">Back to the Main Forecast</a></p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            Chart.defaults.color = '#cbd5e0';
+            Chart.defaults.borderColor = '#4a5568';
             const usComputeSlider = document.getElementById('us-compute-slider');
             const chinaComputeSlider = document.getElementById('china-compute-slider');
             const algoGapSlider = document.getElementById('algo-gap-slider');
