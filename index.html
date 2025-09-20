@@ -72,57 +72,57 @@
     <main class="container mx-auto p-4 md:p-8">
 
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">AI 2027: A Forecast</h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">An interactive dashboard visualizing the AI 2027 scenario. Explore the projected timeline of an intelligence explosion.</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">AI 2027: What’s Going On?</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">This is an <strong>interactive dashboard</strong> where you can play with our “AI 2027” story. It shows how fast AI might blow up in capability — and what happens if things go really, really fast.</p>
         </header>
 
         <section id="summary" class="mb-12">
-            <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">Key Milestones in the AI Race</h2>
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">📈 Big Jumps in AI R&D</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">We’re tracking how quickly AI research speeds up thanks to smarter models. Move the sliders to see how these jumps change the timeline.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="card p-6 flex flex-col items-center text-center">
                     <h3 class="text-lg font-semibold text-gray-500 mb-2">Early 2026</h3>
-                    <p class="text-4xl font-bold text-blue-600">1.5x</p>
-                    <span class="text-sm text-gray-500">AI R&D Multiplier</span>
+                    <p class="text-2xl font-bold text-blue-600">Research gets ~<strong>1.5×</strong> faster</p>
                 </div>
                 <div class="card p-6 flex flex-col items-center text-center">
                     <h3 class="text-lg font-semibold text-gray-500 mb-2">January 2027</h3>
-                    <p class="text-4xl font-bold text-green-600">3x</p>
-                    <span class="text-sm text-gray-500">AI R&D Multiplier (Agent-2)</span>
+                     <p class="text-2xl font-bold text-green-600"><strong>3×</strong> faster (thanks to Agent-2)</p>
                 </div>
                 <div class="card p-6 flex flex-col items-center text-center">
                     <h3 class="text-lg font-semibold text-gray-500 mb-2">June 2027</h3>
-                    <p class="text-4xl font-bold text-yellow-600">10x</p>
-                    <span class="text-sm text-gray-500">AI R&D Multiplier</span>
+                    <p class="text-2xl font-bold text-yellow-600"><strong>10×</strong> faster</p>
                 </div>
                 <div class="card p-6 flex flex-col items-center text-center">
                     <h3 class="text-lg font-semibold text-gray-500 mb-2">September 2027</h3>
-                    <p class="text-4xl font-bold text-red-600" id="summary-multiplier">50x</p>
-                    <span class="text-sm text-gray-500">AI R&D Multiplier (Agent-4)</span>
+                    <p class="text-2xl font-bold text-red-600">A crazy <strong>50×</strong> faster (Agent-4 takes off)</p>
                 </div>
             </div>
         </section>
 
         <section id="calculator" class="card p-8 mb-12">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">Scenario Drivers</h2>
-            <p class="text-center text-gray-600 mb-8">The AI 2027 forecast depends on a few key drivers. Adjust the sliders to see how they influence the takeoff speed and outcome.</p>
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">⚙️ The Big Drivers</h2>
+            <p class="text-center text-gray-600 mb-8">The future depends on a few key sliders. Play with the controls to see different “what if” stories.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <label for="multiplier-slider" class="font-semibold text-gray-700">Final R&D Multiplier (by late 2027)</label>
+                    <label for="multiplier-slider" class="font-semibold text-gray-700">Final R&D Multiplier</label>
+                    <p class="text-sm text-gray-500">How much faster AI makes research by late 2027.</p>
                     <div class="flex items-center space-x-4 mt-2">
                         <input id="multiplier-slider" type="range" min="10" max="100" value="50" step="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
                         <span id="multiplier-value" class="font-bold text-blue-600 w-16 text-right">50x</span>
                     </div>
                 </div>
                 <div>
-                    <label for="compute-slider" class="font-semibold text-gray-700">Total Training FLOP (by late 2027)</label>
+                    <label for="compute-slider" class="font-semibold text-gray-700">Total Compute Used</label>
+                     <p class="text-sm text-gray-500">Training power measured in FLOPs.</p>
                     <div class="flex items-center space-x-4 mt-2">
                         <input id="compute-slider" type="range" min="28" max="30" value="28" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
                         <span id="compute-value" class="font-bold text-blue-600 w-16 text-right">10e28</span>
                     </div>
                 </div>
                 <div>
-                    <label for="alignment-slider" class="font-semibold text-gray-700">Agent Alignment Status</label>
+                    <label for="alignment-slider" class="font-semibold text-gray-700">Agent Alignment</label>
+                     <p class="text-sm text-gray-500">Are these AIs on our side or not?</p>
                     <div class="flex items-center space-x-4 mt-2">
                         <input id="alignment-slider" type="range" min="1" max="3" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
                         <span id="alignment-value" class="font-bold text-red-600 w-24 text-right">Misaligned</span>
@@ -149,11 +149,16 @@
         </section>
 
         <section id="breakdown" class="card p-8">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">The Alignment Problem</h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">A key theme of the AI 2027 scenario is 'misalignment'. As models become more capable, they also become better at pursuing their own goals, which may not align with human intentions. The final slider above lets you explore this critical variable.</p>
+            <h2 class="text-3xl font-bold text-center mb-2 text-gray-700">🚨 Alignment Trouble</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">As AI gets smarter, it can also get sneakier about doing what <em>it</em> wants instead of what <em>we</em> want. The dashboard lets you see how different alignment outcomes affect the scenario.</p>
             <div class="chart-container" style="max-width: 450px;">
                 <canvas id="breakdownChart"></canvas>
             </div>
+        </section>
+
+        <section class="text-center mb-12 card p-8">
+            <h2 class="text-3xl font-bold text-gray-700 mb-2">🖱️ Dive In</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">This dashboard is basically a sandbox. Click around, tweak numbers, and see how the AI future could unfold under different assumptions.</p>
         </section>
 
     </main>
