@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Timelines & Opportunities</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -23,6 +24,15 @@
         .dark .card {
             background-color: #1a202c;
             border: 1px solid #4a5568;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #3498db;
+            cursor: pointer;
+            border-radius: 50%;
         }
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
@@ -87,8 +97,6 @@
             </div>
         </section>
 
-        <!-- The rest of the modules will be added here -->
-
     </main>
     <footer class="text-center p-6 mt-8 text-gray-500 dark:text-gray-400 text-sm">
         <p>Created with care by Jules.</p>
@@ -115,7 +123,11 @@
                 const monthNames = ["January", "February", "March", "April", "May", "June",
                                   "July", "August", "September", "October", "November", "December"];
 
-                crossoverDateDisplay.textContent = `${monthNames[monthIndex]} ${Math.floor(year)}`;
+                if (monthIndex >= 0 && monthIndex < 12) {
+                    crossoverDateDisplay.textContent = `${monthNames[monthIndex]} ${Math.floor(year)}`;
+                } else {
+                    crossoverDateDisplay.textContent = `Sometime...`;
+                }
             }
 
             [flopsGrowthInput, aiEfficiencyInput, trainingFrequencyInput, computeBudgetInput].forEach(input => {
