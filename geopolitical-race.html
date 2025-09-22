@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI vs. Human Science Capacity</title>
+    <title>AI vs. Human Science Capacity - Geopolitical Race</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js for the visualization -->
@@ -48,9 +48,38 @@
             color: transparent;
             background-image: linear-gradient(to right, #e57373, #ef5350);
         }
+        .nav {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .dark .nav {
+            background-color: #1a202c;
+        }
+        .nav a {
+            padding: 1rem;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        .dark .nav a {
+            color: #cbd5e0;
+        }
+        .nav a:hover {
+            background-color: #f8f7f4;
+        }
+        .dark .nav a:hover {
+            background-color: #2d3748;
+        }
     </style>
 </head>
 <body class="p-6 md:p-12">
+    <nav class="nav mb-8">
+        <div class="container mx-auto flex justify-center">
+            <a href="index.html">Home</a>
+            <a href="geopolitical-race.html">Geopolitical Race</a>
+            <a href="flops-calculator.html">FLOPS Calculator</a>
+        </div>
+    </nav>
     <div class="container mx-auto">
         <header class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold mb-4 dark:text-white">
@@ -151,7 +180,6 @@
 
     <footer class="text-center p-6 mt-8 text-gray-500 dark:text-gray-400 text-sm">
         <p>This dashboard is an interactive visualization of the scenario presented at <a href="https://ai-2027.com/" target="_blank" class="text-blue-600 hover:underline dark:text-blue-400">ai-2027.com</a>.</p>
-        <p><a href="index.html" class="text-blue-600 hover:underline dark:text-blue-400">Back to the Main Forecast</a></p>
     </footer>
 
     <script>
