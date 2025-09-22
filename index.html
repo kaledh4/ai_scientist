@@ -3,22 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Scientist Equivalent Forecaster</title>
+    <title>AI Timelines & Opportunities</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutral Tech -->
-    <!-- Application Structure Plan: A single-page, scrolling narrative design that guides the user from the high-level conclusion to the underlying mechanics. The core of the app is an interactive calculator where users can adjust the key assumptions of the analogy (total exaFLOPs, scientists/exaFLOP, 24/7 multiplier). This interactive core dynamically updates all subsequent charts and text outputs. This structure was chosen to transform a static text-based analogy into an exploratory tool. It allows users to test the model's sensitivity, understand the drivers of the forecast, and see the impact of their changes in real-time, which is far more engaging and informative than a linear report. -->
-    <!-- Visualization & Content Choices:
-        1. Key Metrics (2025 vs 2026): Goal: Inform. Method: Dynamic stat cards. Interaction: Values for 2026 update from the calculator. Justification: Provides a quick, high-level summary.
-        2. Interactive Calculator: Goal: Explore assumptions. Method: HTML sliders. Interaction: User drags sliders to change inputs. Justification: The most effective way to engage with the model's core variables.
-        3. ExaFLOP Growth Chart: Goal: Compare change over time. Method: Bar chart (Chart.js). Interaction: The 2026 bar updates from the calculator. Justification: Clearly visualizes the scale of infrastructure growth.
-        4. AI vs. Human Scientists Chart: Goal: Compare AI capacity to a known human scale. Method: Bar chart (Chart.js). Interaction: AI bar updates from the calculator. Justification: Grounds the abstract forecast in a relatable comparison.
-        5. Future Infrastructure Breakdown: Goal: Organize composition. Method: Donut chart (Chart.js). Interaction: Hover tooltips. Justification: Shows the relative contribution of different projects to the total future compute.
-        All visualizations are rendered on Canvas via Chart.js. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -26,7 +12,8 @@
             color: #2c3e50;
         }
         .dark body {
-            background-color: #1a202c;
+            background-color: #000;
+
             color: #cbd5e0;
         }
         .card {
@@ -55,34 +42,76 @@
             cursor: pointer;
             border-radius: 50%;
         }
-        .slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            background: #3498db;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
+        .dark .card {
+            background-color: #1a202c;
+            border: 1px solid #4a5568;
         }
     </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
 </head>
 <body class="antialiased">
-
     <main class="container mx-auto p-4 md:p-8">
-
         <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-2">AI Timelines & Opportunities</h1>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">An educational tool for making educated guesses about the future of AI.</p>
+        </header>
+
+        <section id="learning-goals" class="card p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Learning Goals</h2>
+            <p class="text-gray-600 dark:text-gray-400">By the end, you'll understand how to estimate when AI might match or exceed human research capacity.</p>
+        </section>
+
+        <section id="key-concepts" class="card p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Key Concepts</h2>
+            <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                <li><strong>FLOPS:</strong> Floating Point Operations Per Second. A measure of a computer's performance.</li>
+                <li><strong>Compute Scaling:</strong> The trend of increasing the amount of computation used to train AI models.</li>
+                <li><strong>Research Multipliers:</strong> The factor by which AI accelerates the pace of scientific and technological discovery.</li>
+            </ul>
+        </section>
+
+        <section id="flops-calculator" class="card p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">🧮 Your FLOPS Estimation Tool</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Current State (2025)</h3>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                        <li>Human researchers: ~1M globally</li>
+                        <li>Papers/year per researcher: ~2</li>
+                        <li>GPT-4 training: ~10^25 FLOPS</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Your Predictions:</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="flops-growth" class="block text-sm font-medium text-gray-700 dark:text-gray-300">📊 FLOPS growth rate (% yearly)</label>
+                            <input type="number" id="flops-growth" value="50" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
+                        <div>
+                            <label for="ai-efficiency" class="block text-sm font-medium text-gray-700 dark:text-gray-300">🧠 AI efficiency gains (x)</label>
+                            <input type="number" id="ai-efficiency" value="2" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
+                        <div>
+                            <label for="training-frequency" class="block text-sm font-medium text-gray-700 dark:text-gray-300">⏱️ Training frequency (months)</label>
+                            <input type="number" id="training-frequency" value="12" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
+                        <div>
+                            <label for="compute-budget" class="block text-sm font-medium text-gray-700 dark:text-gray-300">💰 Compute budget ($ billion)</label>
+                            <input type="number" id="compute-budget" value="10" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <p class="text-lg text-gray-600 dark:text-gray-400">Your Prediction: AI matches human research capacity in</p>
+                <p id="crossover-date" class="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">[MONTH YEAR]</p>
+            </div>
+        </section>
+
+    </main>
+    <footer class="text-center p-6 mt-8 text-gray-500 dark:text-gray-400 text-sm">
+        <p>Created with care by Jules.</p>
             <div class="flex items-center justify-center">
                  <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-2">AI 2027: What’s Going On?</h1>
                  <button id="play-button" class="ml-4 p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600">
@@ -197,9 +226,32 @@
         <p>This dashboard is an interactive visualization of the scenario presented at <a href="https://ai-2027.com/" target="_blank" class="text-blue-600 hover:underline dark:text-blue-400">ai-2027.com</a>.</p>
         <p class="mt-2"><a href="in.html" class="text-blue-600 hover:underline dark:text-blue-400">Explore the Geopolitical Race</a></p>
     </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const flopsGrowthInput = document.getElementById('flops-growth');
+            const aiEfficiencyInput = document.getElementById('ai-efficiency');
+            const trainingFrequencyInput = document.getElementById('training-frequency');
+            const computeBudgetInput = document.getElementById('compute-budget');
+            const crossoverDateDisplay = document.getElementById('crossover-date');
+
+            function calculateCrossover() {
+                const flopsGrowth = parseFloat(flopsGrowthInput.value) || 0;
+                const aiEfficiency = parseFloat(aiEfficiencyInput.value) || 1;
+                const trainingFrequency = parseFloat(trainingFrequencyInput.value) || 12;
+                const computeBudget = parseFloat(computeBudgetInput.value) || 1;
+
+                // Simplified placeholder formula
+                const baseYear = 2035;
+                const year = baseYear - (flopsGrowth / 10) - (aiEfficiency * 2) - (computeBudget / 5) + (trainingFrequency / 6);
+
+                const monthIndex = Math.floor((year - Math.floor(year)) * 12);
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                                  "July", "August", "September", "October", "November", "December"];
+
+                if (monthIndex >= 0 && monthIndex < 12) {
+                    crossoverDateDisplay.textContent = `${monthNames[monthIndex]} ${Math.floor(year)}`;
+                } else {
+                    crossoverDateDisplay.textContent = `Sometime...`;
             Chart.defaults.color = '#cbd5e0';
             Chart.defaults.borderColor = '#4a5568';
             // Sliders and value displays
@@ -367,46 +419,14 @@
                         return label;
                     }
                 }
-            };
-
-            function createGrowthChart() {
-                const ctx = document.getElementById('growthChart').getContext('2d');
-                growthChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['GPT-4 (2023)', 'Agent-0 (Late 2025)', 'Agent-1 (Late 2025)', 'Agent-2 (Jan 2027)'],
-                        datasets: [{
-                            label: 'Training FLOP',
-                            data: [25.3, 27, 27.6, 28], // log10 values
-                            backgroundColor: [
-                                'rgba(54, 162, 235, 0.7)',
-                                'rgba(75, 192, 192, 0.7)',
-                                'rgba(153, 102, 255, 0.7)',
-                                'rgba(255, 99, 132, 0.7)'
-                            ],
-                            borderColor: 'rgba(0,0,0,0.2)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false }, tooltip: chartTooltip },
-                        scales: {
-                            y: {
-                                type: 'logarithmic',
-                                title: { display: true, text: 'FLOP (Log Scale)' },
-                                ticks: {
-                                    callback: function(value, index, values) {
-                                        return (10**value).toExponential(0);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
             }
 
+            [flopsGrowthInput, aiEfficiencyInput, trainingFrequencyInput, computeBudgetInput].forEach(input => {
+                input.addEventListener('input', calculateCrossover);
+            });
+
+            // Initial calculation
+            calculateCrossover();
             function createMultiplierChart() {
                 const ctx = document.getElementById('comparisonChart').getContext('2d');
                 multiplierChart = new Chart(ctx, {

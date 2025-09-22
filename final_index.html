@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Timelines & Opportunities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #2c3e50;
+        }
+        .dark body {
+            background-color: #000;
+            color: #cbd5e0;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .dark .card {
+            background-color: #1a202c;
+            border: 1px solid #4a5568;
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+</head>
+<body class="antialiased">
+    <main class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-2">AI Timelines & Opportunities</h1>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">An educational tool for making educated guesses about the future of AI.</p>
+        </header>
+
+        <section id="learning-goals" class="card p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Learning Goals</h2>
+            <p class="text-gray-600 dark:text-gray-400">By the end, you'll understand how to estimate when AI might match or exceed human research capacity.</p>
+        </section>
+
+        <section id="key-concepts" class="card p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Key Concepts</h2>
+            <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                <li><strong>FLOPS:</strong> Floating Point Operations Per Second. A measure of a computer's performance.</li>
+                <li><strong>Compute Scaling:</strong> The trend of increasing the amount of computation used to train AI models.</li>
+                <li><strong>Research Multipliers:</strong> The factor by which AI accelerates the pace of scientific and technological discovery.</li>
+            </ul>
+        </section>
+
+        <section id="flops-calculator" class="card p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">🧮 Your FLOPS Estimation Tool</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Current State (2025)</h3>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                        <li>Human researchers: ~1M globally</li>
+                        <li>Papers/year per researcher: ~2</li>
+                        <li>GPT-4 training: ~10^25 FLOPS</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Your Predictions:</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="flops-growth" class="block text-sm font-medium text-gray-700 dark:text-gray-300">📊 FLOPS growth rate (% yearly)</label>
+                            <input type="number" id="flops-growth" value="50" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
+                        <div>
+                            <label for="ai-efficiency" class="block text-sm font-medium text-gray-700 dark:text-gray-300">🧠 AI efficiency gains (x)</label>
+                            <input type="number" id="ai-efficiency" value="2" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
+                        <div>
+                            <label for="training-frequency" class="block text-sm font-medium text-gray-700 dark:text-gray-300">⏱️ Training frequency (months)</label>
+                            <input type="number" id="training-frequency" value="12" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
+                        <div>
+                            <label for="compute-budget" class="block text-sm font-medium text-gray-700 dark:text-gray-300">💰 Compute budget ($ billion)</label>
+                            <input type="number" id="compute-budget" value="10" class="mt-1 block w-full rounded-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <p class="text-lg text-gray-600 dark:text-gray-400">Your Prediction: AI matches human research capacity in</p>
+                <p id="crossover-date" class="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">[MONTH YEAR]</p>
+            </div>
+        </section>
+
+    </main>
+    <footer class="text-center p-6 mt-8 text-gray-500 dark:text-gray-400 text-sm">
+        <p>Created with care by Jules.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const flopsGrowthInput = document.getElementById('flops-growth');
+            const aiEfficiencyInput = document.getElementById('ai-efficiency');
+            const trainingFrequencyInput = document.getElementById('training-frequency');
+            const computeBudgetInput = document.getElementById('compute-budget');
+            const crossoverDateDisplay = document.getElementById('crossover-date');
+
+            function calculateCrossover() {
+                const flopsGrowth = parseFloat(flopsGrowthInput.value) || 0;
+                const aiEfficiency = parseFloat(aiEfficiencyInput.value) || 1;
+                const trainingFrequency = parseFloat(trainingFrequencyInput.value) || 12;
+                const computeBudget = parseFloat(computeBudgetInput.value) || 1;
+
+                // Simplified placeholder formula
+                const baseYear = 2035;
+                const year = baseYear - (flopsGrowth / 10) - (aiEfficiency * 2) - (computeBudget / 5) + (trainingFrequency / 6);
+
+                const monthIndex = Math.floor((year - Math.floor(year)) * 12);
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                                  "July", "August", "September", "October", "November", "December"];
+
+                if (monthIndex >= 0 && monthIndex < 12) {
+                    crossoverDateDisplay.textContent = `${monthNames[monthIndex]} ${Math.floor(year)}`;
+                } else {
+                    crossoverDateDisplay.textContent = `Sometime...`;
+                }
+            }
+
+            [flopsGrowthInput, aiEfficiencyInput, trainingFrequencyInput, computeBudgetInput].forEach(input => {
+                input.addEventListener('input', calculateCrossover);
+            });
+
+            // Initial calculation
+            calculateCrossover();
+        });
+    </script>
+</body>
+</html>
