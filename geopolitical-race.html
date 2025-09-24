@@ -13,8 +13,8 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7f3e9;
-            color: #3b2c26;
+            background-color: #f8f7f4;
+            color: #2c3e50;
         }
         .dark body {
             background-color: #000;
@@ -237,9 +237,11 @@
             }
 
             function updateAll() {
+                console.log("Updating geopolitical race calculator...");
                 const usCompute = parseFloat(usComputeSlider.value);
                 const chinaCompute = parseFloat(chinaComputeSlider.value);
                 const algoGap = parseFloat(algoGapSlider.value);
+                console.log("US Compute:", usCompute, "China Compute:", chinaCompute, "Algo Gap:", algoGap);
 
                 usComputeValue.textContent = `${usCompute.toFixed(0)}%`;
                 chinaComputeValue.textContent = `${chinaCompute.toFixed(0)}%`;
@@ -253,17 +255,20 @@
 
                 const usPower = usCompute * usAlgoLevel;
                 const chinaPower = chinaCompute * chinaAlgoLevel;
+                console.log("US Power:", usPower, "China Power:", chinaPower);
 
                 let powerGap = 0;
                 if (chinaPower > 0) {
                     powerGap = usPower / chinaPower;
                 }
                 powerGapSpan.textContent = `${powerGap.toFixed(1)}x`;
+                console.log("Power Gap:", powerGap);
 
                 if (capacityChart) {
                     capacityChart.data.datasets[0].data = [usPower, chinaPower];
                     capacityChart.update();
                 }
+                console.log("Geopolitical race calculator update complete.");
             }
 
             createRaceChart();
