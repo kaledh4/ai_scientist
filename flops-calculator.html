@@ -115,14 +115,17 @@
             const crossoverDateDisplay = document.getElementById('crossover-date');
 
             function calculateCrossover() {
+                console.log("Calculating crossover date...");
                 const flopsGrowth = parseFloat(flopsGrowthInput.value) || 0;
                 const aiEfficiency = parseFloat(aiEfficiencyInput.value) || 1;
                 const trainingFrequency = parseFloat(trainingFrequencyInput.value) || 12;
                 const computeBudget = parseFloat(computeBudgetInput.value) || 1;
+                console.log("Inputs - FLOPS Growth:", flopsGrowth, "AI Efficiency:", aiEfficiency, "Training Frequency:", trainingFrequency, "Compute Budget:", computeBudget);
 
                 // Simplified placeholder formula
                 const baseYear = 2035;
                 const year = baseYear - (flopsGrowth / 10) - (aiEfficiency * 2) - (computeBudget / 5) + (trainingFrequency / 6);
+                console.log("Calculated year:", year);
 
                 const monthIndex = Math.floor((year - Math.floor(year)) * 12);
                 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -133,6 +136,7 @@
                 } else {
                     crossoverDateDisplay.textContent = `Sometime...`;
                 }
+                console.log("Crossover date calculation complete.");
             }
 
             [flopsGrowthInput, aiEfficiencyInput, trainingFrequencyInput, computeBudgetInput].forEach(input => {

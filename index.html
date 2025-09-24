@@ -285,11 +285,14 @@
             }
 
             function updateDashboard() {
+                console.log("Updating dashboard...");
                 const time = timeSlider.value;
+                console.log("Time slider value:", time);
                 timeValue.textContent = mapTimeToDate(time);
 
                 // 1. Time -> R&D Multiplier
                 const currentMultiplier = mapTimeToMultiplier(time);
+                console.log("Current multiplier:", currentMultiplier);
                 updateRdCards(time);
 
                 if (multiplierChart) {
@@ -300,6 +303,7 @@
                 // 2. R&D Multiplier -> AI Scientists
                 const baseAiScientists = 50000;
                 const currentAiScientists = baseAiScientists * currentMultiplier;
+                console.log("Current AI scientists:", currentAiScientists);
                 if (aiVsHumanChart) {
                     aiVsHumanChart.data.datasets[0].data[1] = currentAiScientists;
                     aiVsHumanChart.update();
@@ -323,6 +327,7 @@
 
                 updateHeadlines(currentMultiplier);
                 updateOutcomeCard(currentMultiplier);
+                console.log("Dashboard update complete.");
             }
 
             function updateHeadlines(multiplier) {
